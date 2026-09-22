@@ -1,16 +1,46 @@
 ```
+# Build artifacts
+dist/
+build/
+*.o
+*.obj
+*.out
+
 # Dependencies
 node_modules/
+.pnpm-store/
+.yarn/
+.yalc/
 
-# Astro-specific
-.astro/
-
-# Logs and temp files
-*.log
+# Cache and temporary files
+.vite/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 *.tmp
+*.swp
+*.swo
+
+# Logs
+*.log
 
 # Environment
 .env
 .env.local
 .env.*
+
+# Editors
+.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Astro-specific
+.astro/
 ```
