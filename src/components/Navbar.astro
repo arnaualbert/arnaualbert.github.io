@@ -1,0 +1,94 @@
+---
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+const navItems: NavItem[] = [
+  { label: 'About', href: '#about' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Studies', href: '#studies' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Contact', href: '#contact' },
+];
+---
+
+<nav class="border-b border-[#334155] fixed w-full z-50 top-0 start-0 bg-[#161a22]/95 backdrop-blur-sm transition-all duration-300">
+  <div class="max-w-7xl flex flex-wrap items-center justify-between mx-auto px-4 py-3">
+    <a href="#" class="flex items-center gap-3 group">
+      <svg class="w-8 h-8 text-[#7dd3fc] group-hover:text-[#f8fafc] transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 18" />
+      </svg>
+      <span id="nav-name" class="text-[#f8fafc] font-medium text-lg opacity-0 -translate-x-4 transition-all duration-300 hidden md:block">Arnau Albert Sánchez</span>
+    </a>
+    
+    <button 
+      data-collapse-toggle="navbar-main" 
+      type="button" 
+      class="inline-flex items-center p-2 w-10 h-10 justify-center text-[#94a3b8] rounded-lg md:hidden hover:bg-[#334155]/50 focus:outline-none focus:ring-2 focus:ring-[#7dd3fc]/50"
+      aria-controls="navbar-main" 
+      aria-expanded="false"
+    >
+      <span class="sr-only">Open main menu</span>
+      <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+      </svg>
+    </button>
+    
+    <div class="items-center hidden w-full md:flex md:w-auto md:order-1" id="navbar-main">
+      <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 text-center">
+        {navItems.map((item) => (
+          <li>
+            <a 
+              href={item.href} 
+              class="block py-2 px-3 text-[#94a3b8] hover:text-[#7dd3fc] transition-colors rounded-sm"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const button = document.querySelector('[data-collapse-toggle="navbar-main"]');
+    const menu = document.getElementById('navbar-main');
+    const navName = document.getElementById('nav-name');
+    
+    if (button && menu) {
+      button.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+        const expanded = button.getAttribute('aria-expanded') === 'true' || false;
+        button.setAttribute('aria-expanded', !expanded);
+      });
+      
+      const menuLinks = menu.querySelectorAll('a');
+      menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth < 768) {
+            menu.classList.add('hidden');
+            button.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+    }
+    
+    if (navName) {
+      const showNameOnScroll = () => {
+        if (window.scrollY > 50) {
+          navName.classList.remove('opacity-0', '-translate-x-4');
+          navName.classList.add('opacity-100', 'translate-x-0');
+        } else {
+          navName.classList.remove('opacity-100', 'translate-x-0');
+          navName.classList.add('opacity-0', '-translate-x-4');
+        }
+      };
+      
+      showNameOnScroll();
+      window.addEventListener('scroll', showNameOnScroll);
+    }
+  });
+</script>
