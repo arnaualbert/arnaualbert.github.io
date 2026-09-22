@@ -1,2 +1,34 @@
-# GitHub workflow files
-.github/workflows/
+```gitignore
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+*.css.map
+
+# Cache directories
+.cache/
+.node_cache/
+
+# Environment variables
+.env
+.env.local
+.env.*
+
+# IDE specific
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+```

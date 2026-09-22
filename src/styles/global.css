@@ -1,13 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  /* Executive Architectural Palette */
-  --color-bg-primary: #0c0e12;      /* Deep charcoal background */
-  --color-bg-secondary: #161a22;    /* Technical slate */
-  --color-text-primary: #f8fafc;    /* Ice blue / off-white */
-  --color-text-secondary: #94a3b8;  /* Muted slate text */
-  --color-accent: #7dd3fc;          /* Subtle ice-blue accent */
-  --color-border: #334155;          /* Hairline borders */
+  /* Executive Architectural Palette - Stitch Design System */
+  --color-bg-primary: #0c0e12;      /* Obsidian charcoal - Base Layer */
+  --color-bg-secondary: #141820;    /* Surface Tier - Cards & Panels */
+  --color-bg-tertiary: #1a1c20;     /* Surface Container Low */
+  --color-bg-elevated: #1e2024;     /* Surface Container */
+  
+  --color-text-primary: #f8fafc;    /* Optic white */
+  --color-text-secondary: #e2e8f0;  /* Muted parchment */
+  --color-text-muted: #94a3b8;      /* Slate metadata */
+  --color-text-dim: #64748b;        /* Placeholder text */
+  
+  --color-accent-primary: #38bdf8;  /* Ice blue - Primary functional emphasis */
+  --color-accent-secondary: #7bd0ff;/* Primary fixed dim */
+  --color-border: #222734;          /* Structural boundary borders */
+  --color-border-subtle: #3e484f;   /* Outline variant */
+  
+  /* Interactive states */
+  --color-focus: #38bdf8;
+  --color-hover-bg: #243046;
+  --color-active-bg: #1c222d;
 }
 
 html {
@@ -17,26 +30,107 @@ html {
 body {
   @apply bg-[#0c0e12] text-[#f8fafc] font-sans antialiased;
   min-height: 100vh;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
 }
 
-/* Custom scrollbar for technical feel */
+/* Typography - Geist for headings, Inter for body */
+.font-display {
+  font-family: 'Geist', system-ui, -apple-system, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.font-body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  letter-spacing: -0.005em;
+}
+
+.font-mono {
+  font-family: 'Geist Mono', 'Fira Code', monospace;
+}
+
+/* Custom scrollbar - Technical terminal style */
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-[#161a22];
+  @apply bg-[#141820];
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-[#334155] rounded;
+  @apply bg-[#222734] rounded-[4px];
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-[#475569];
+  @apply bg-[#3e484f];
 }
 
-/* Selection color */
+/* Selection color - Ice blue tint */
 ::selection {
-  @apply bg-[#7dd3fc]/30 text-[#f8fafc];
+  @apply bg-[#38bdf8]/20 text-[#f8fafc];
+}
+
+/* Focus states - Sharp 1px outline, no blur */
+*:focus-visible {
+  outline: 1px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Hairline borders - No blur, crisp edges */
+.border-hairline {
+  border-width: 1px;
+  border-color: var(--color-border);
+}
+
+/* Card elevation through tonal stepping */
+.card-surface {
+  @apply bg-[#141820] border border-[#222734] rounded-[4px];
+}
+
+.card-surface-hover {
+  @apply card-surface transition-colors duration-200 hover:bg-[#1a1c20] hover:border-[#3e484f];
+}
+
+/* Terminal/Code block styling */
+.terminal-block {
+  @apply bg-[#0c0e12] border border-[#222734] rounded-[4px] p-4 font-mono text-sm;
+}
+
+/* Chip/Status marker styling */
+.chip {
+  @apply inline-flex items-center px-2 py-0.5 rounded-[4px] text-[11px] font-medium uppercase tracking-wider;
+  @apply bg-[#141820] border border-[#222734] text-[#94a3b8];
+}
+
+.chip-active {
+  @apply border-[#38bdf8] text-[#38bdf8];
+}
+
+/* Button variants */
+.btn-primary {
+  @apply bg-[#1e293b] text-[#f8fafc] border border-[#38bdf8] rounded-[4px] px-4 py-2;
+  @apply font-medium transition-colors duration-200;
+  @apply hover:bg-[#243046] hover:text-[#38bdf8];
+}
+
+.btn-secondary {
+  @apply bg-[#141820] text-[#94a3b8] border border-[#222734] rounded-[4px] px-4 py-2;
+  @apply font-medium transition-colors duration-200;
+  @apply hover:border-[#475569] hover:text-[#f8fafc];
+}
+
+.btn-ghost {
+  @apply bg-transparent text-[#94a3b8] rounded-[4px] px-4 py-2;
+  @apply font-medium transition-colors duration-200;
+  @apply hover:text-[#f8fafc] hover:bg-[#141820];
+}
+
+/* Input fields */
+.input-terminal {
+  @apply bg-[#141820] border border-[#222734] rounded-[4px] px-3 py-2;
+  @apply text-[#f8fafc] placeholder-[#64748b] font-body text-sm;
+  @apply focus:border-[#38bdf8] focus:outline-none;
 }
