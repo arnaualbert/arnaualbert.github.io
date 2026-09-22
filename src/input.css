@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@theme {
+    /*
+    The 'Cool Blues' palette, with its deep and serene tones like #1B2631 and #3F4E4F, combined with the lighter shades of #A5C8D6, #F0F4F8, and #D9E4E0, creates a welcoming and calming effect that can transform any space into a tranquil retreat.
+    This palette shines in boutique interiors, where the harmonious blend of cool blues can enhance the overall aesthetic, making the space feel both luxurious and inviting.
+    Darkest to brightest
+    */
+    --color-first: #1B2631;
+    --color-second: #3F4E4F;
+    --color-third: #A5C8D6;
+    --color-fourth: #F0F4F8;
+    --color-fifth: #D9E4E0;
+
+}
