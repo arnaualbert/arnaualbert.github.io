@@ -25,3 +25,8 @@
 ::-webkit-scrollbar {
   display: none;
 }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* 64px header + breathing room */
+}
