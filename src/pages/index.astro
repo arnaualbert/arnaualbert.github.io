@@ -1,3 +1,26 @@
+---
+// Calculate experience from 16/01/2023 until today
+const startDate = new Date('2023-01-16');
+const today = new Date();
+const timeDiff = today.getTime() - startDate.getTime();
+const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+const yearsDiff = Math.floor(daysDiff / 365);
+const monthsDiff = Math.floor((daysDiff % 365) / 30);
+
+let experienceText;
+if (yearsDiff >= 1) {
+  if (monthsDiff >= 6) {
+    experienceText = `${yearsDiff}+ Years`;
+  } else if (monthsDiff >= 3) {
+    experienceText = `${yearsDiff}.5 Years`;
+  } else {
+    experienceText = `${yearsDiff} Year${yearsDiff > 1 ? 's' : ''}`;
+  }
+} else {
+  experienceText = `${monthsDiff} Months`;
+}
+---
+
 <!DOCTYPE html>
 
 <html class="dark" lang="en">
@@ -133,7 +156,7 @@
                                 Arnau Albert Sánchez
                             </h1>
                             <p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl leading-relaxed">
-                                Full Stack web developer & DevOps engineer in Barcelona with 2+ years of experience
+                                Full Stack web developer & DevOps engineer in Barcelona with {experienceText} of experience
                                 engineering high-performance software, specialized bioinformatics systems, and automated
                                 cloud infrastructure for world-class supercomputing and genomics institutes.
                             </p>
@@ -166,7 +189,7 @@
                                 <span class="font-code text-label-sm text-outline">EXPERIENCE</span>
                                 <span class="material-symbols-outlined text-primary text-[18px]">verified</span>
                             </div>
-                            <span class="font-display text-headline-lg text-on-surface font-semibold">2+ Years</span>
+                            <span class="font-display text-headline-lg text-on-surface font-semibold">{experienceText}</span>
                             <span class="font-body-sm text-body-sm text-on-surface-variant mt-1">High-throughput
                                 software & automated cloud</span>
                         </div>
@@ -224,7 +247,7 @@
                                     <span class="font-code text-label-sm text-primary uppercase">Mission Profile</span>
                                 </div>
                                 <p class="font-body-lg text-body-lg text-on-surface leading-relaxed">
-                                    Hello! I'm a passionate Full Stack Developer with 2 years of experience in building
+                                    Hello! I'm a passionate Full Stack Developer with {experienceText} of experience in building
                                     innovative software solutions. My journey into development began with a desire to
                                     create my own software, which led me to dive deep into the world of coding and
                                     problem-solving.
