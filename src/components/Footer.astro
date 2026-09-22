@@ -1,0 +1,43 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="w-full bg-surface-container-lowest mt-space-xl">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 py-space-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-space-lg">
+    <div class="flex flex-col gap-space-xs">
+      <div class="flex items-center gap-space-sm">
+        <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+          Arnau Albert Sánchez
+        </span>
+        <span class="font-code text-code text-on-surface-variant">[Staff/Exec Suite]</span>
+      </div>
+      <p class="font-body-sm text-body-sm text-on-surface-variant">
+        High-throughput cloud architecture, platform resilience, and full-lifecycle engineering leadership.
+      </p>
+      <p class="font-label-sm text-label-sm text-outline mt-space-xs">
+        © {year} Arnau Albert Sánchez. All rights reserved.
+      </p>
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-xl">
+      <div class="flex flex-col gap-space-xs">
+        <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Navigation</span>
+        <div class="flex flex-col gap-1">
+          <a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" data-path="about" href="#about">About &amp; Core Stack</a>
+          <a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" data-path="experience" href="#experience">Engineering Leadership</a>
+          <a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" data-path="projects" href="#projects">Systems &amp; Architecture</a>
+          <a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" data-path="contact" href="#contact">Encrypted Contact</a>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-space-xs p-space-md rounded bg-surface-container-low min-w-[200px]">
+        <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">System Spec</span>
+        <div class="font-code text-code text-on-surface-variant flex flex-col gap-0.5">
+          <div class="flex justify-between gap-4"><span>Runtime:</span><span class="text-primary font-medium">Cloud Native</span></div>
+          <div class="flex justify-between gap-4"><span>Security:</span><span class="text-on-surface">Zero Trust</span></div>
+          <div class="flex justify-between gap-4"><span>Status:</span><span class="text-primary-container font-medium">Operational</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
