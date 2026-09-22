@@ -1,218 +1,751 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Navbar from '../components/Navbar.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import TimelineSection from '../components/TimelineSection.astro';
-import { getTranslations, calculateYearsExperience } from '../i18n/utils';
-import { portfolioData } from '../data/portfolio';
-
-// Get language from URL or default to English
-const lang = Astro.url.searchParams.get('lang') || 'en';
-const t = getTranslations(lang as keyof typeof import('../i18n/ui').ui);
-
-// Calculate years of experience dynamically
-const yearsExp = calculateYearsExperience(portfolioData.startYear);
-
-const experienceItems = portfolioData.workExperience.map(exp => ({
-  title: `${exp.role} @ ${exp.institution}`,
-  period: exp.period,
-}));
-
-const studiesItems = portfolioData.education.map(edu => ({
-  title: edu.degree,
-  period: edu.period,
-}));
 ---
 
-<BaseLayout title={`${portfolioData.name} | ${t('hero.title')}`} lang={lang}>
-  <Navbar lang={lang} />
-  
-  <!-- Hero Section -->
-  <section id="hero" class="pt-32 pb-16 px-4 min-h-screen flex items-center">
-    <div class="max-w-5xl mx-auto w-full">
-      <!-- Credibility Strip -->
-      <div class="mb-8 p-4 bg-[#161a22]/80 border border-[#334155] rounded-lg">
-        <div class="flex flex-wrap gap-4 items-center justify-center md:justify-start">
-          <span class="text-[#7dd3fc] font-mono text-sm">{t('section.architecture')}</span>
-          <div class="hidden md:block w-px h-4 bg-[#334155]"></div>
-          <span class="text-[#94a3b8] text-sm">{yearsExp}+ {t('credibility.experience')}</span>
-          <div class="hidden md:block w-px h-4 bg-[#334155]"></div>
-          <span class="text-[#94a3b8] text-sm">{portfolioData.affiliations.join(' & ')}</span>
-          <div class="hidden md:block w-px h-4 bg-[#334155]"></div>
-          <span class="text-[#94a3b8] text-sm">{portfolioData.coreStack.join(' + ')}</span>
-        </div>
-      </div>
-      
-      <h1 class="text-[#f8fafc] text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-        {portfolioData.name}
+<BaseLayout title="Arnau Albert Sánchez | Full Stack & DevOps" lang="en">
+<!-- ═══ HEADER ═══ -->
+<header class="fixed top-0 left-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+<div class="h-16 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
+  <div class="flex items-center gap-space-md">
+    <a class="flex items-center gap-space-sm" data-path="overview" href="#">
+      <span class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">Arnau Albert Sánchez</span>
+    </a>
+    <span class="hidden sm:inline-flex items-center px-space-xs py-0.5 rounded-DEFAULT bg-surface-container-high text-on-surface-variant font-code text-code">Full Stack & DevOps</span>
+  </div>
+  <nav class="hidden md:flex items-center gap-space-lg" data-active-classes="text-on-surface bg-surface-container-high rounded px-3 py-1.5 font-medium">
+    <a aria-current="page" class="transition-colors text-on-surface bg-surface-container-high rounded px-3 py-1.5 font-medium" data-path="overview" href="#">Overview</a>
+    <a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low px-3 py-1.5 rounded transition-colors font-label-md text-label-md" data-path="about" href="#about">About</a>
+    <a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low px-3 py-1.5 rounded transition-colors font-label-md text-label-md" data-path="experience" href="#experience">Experience</a>
+    <a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low px-3 py-1.5 rounded transition-colors font-label-md text-label-md" data-path="projects" href="#projects">Projects</a>
+    <a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low px-3 py-1.5 rounded transition-colors font-label-md text-label-md" data-path="contact" href="#contact">Contact</a>
+  </nav>
+  <div class="flex items-center gap-space-md">
+    <div class="hidden lg:flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container-low">
+      <span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+      <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Available for roles</span>
+    </div>
+    <a class="px-space-md py-1.5 rounded bg-surface-container-high text-on-surface hover:bg-surface-container-highest hover:text-on-surface transition-colors font-label-md text-label-md font-medium" data-path="resume" href="#">Resume / Contact</a>
+    <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0">
+      <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+    </div>
+  </div>
+</div>
+</header>
+
+<main class="w-full pt-16 bg-surface">
+<div class="flex flex-col w-full">
+
+<!-- ═══ TELEMETRY STRIP ═══ -->
+<section class="w-full bg-surface-container-lowest px-6 lg:px-12 py-3">
+<div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4 font-code text-label-sm text-outline">
+  <div class="flex items-center gap-4">
+    <span class="inline-flex items-center gap-1.5 text-on-surface">
+      <span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+      NODE: BCN-PROD-01
+    </span>
+    <span class="hidden sm:inline text-outline">/</span>
+    <span class="hidden sm:inline">LATENCY: 12ms</span>
+    <span class="hidden sm:inline text-outline">/</span>
+    <span class="hidden md:inline">KERNEL: 6.8.0-GENERIC</span>
+  </div>
+  <div class="flex items-center gap-6">
+    <span class="text-on-surface-variant font-code">AUTONOMOUS SYSTEMS ARCHITECTURE</span>
+    <span class="text-primary font-medium">SYS.VERIFIED</span>
+  </div>
+</div>
+</section>
+
+<!-- ═══ HERO ═══ -->
+<section class="w-full bg-surface py-16 lg:py-24 px-6 lg:px-12 relative overflow-hidden">
+<div class="absolute inset-0 bg-[radial-gradient(#282a2e_1px,transparent_1px)] [background-size:24px_24px] opacity-25 pointer-events-none"></div>
+<div class="max-w-7xl mx-auto relative z-10">
+
+  <!-- badge row -->
+  <div class="flex flex-wrap items-center gap-3 mb-8">
+    <span class="inline-flex items-center gap-2 px-3 py-1 rounded bg-surface-container text-on-surface font-code text-label-sm">
+      <span class="w-2 h-2 rounded-full bg-primary-container"></span>
+      Based in Barcelona, ES • Full Stack & DevOps
+    </span>
+    <span class="px-2.5 py-1 rounded bg-surface-container-high text-on-surface-variant font-code text-label-sm">
+      BSC & IRB Alum
+    </span>
+    <span class="px-2.5 py-1 rounded bg-surface-container-high text-primary font-code text-label-sm">
+      Available Q3/Q4 2024
+    </span>
+  </div>
+
+  <!-- headline grid -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-12">
+    <div class="lg:col-span-8">
+      <p class="font-code text-primary text-label-md tracking-wider uppercase mb-3">// Senior Technical Dossier</p>
+      <h1 class="font-display text-display text-on-surface tracking-tight font-semibold mb-6">
+        Arnau Albert Sánchez
       </h1>
-      <h2 class="text-[#94a3b8] text-xl md:text-2xl mb-8">
-        {t('hero.title')}
-      </h2>
-      <p class="text-[#94a3b8] text-lg mb-8 max-w-3xl">
-        {t('hero.subtitle')}
+      <p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl leading-relaxed">
+        Full Stack web developer & DevOps engineer in Barcelona with 2+ years of experience engineering high-performance software, specialized bioinformatics systems, and automated cloud infrastructure for world-class supercomputing and genomics institutes.
       </p>
-      
-      <!-- Technical Matrix -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-12">
-        <div class="bg-[#161a22]/50 border border-[#334155] rounded-lg p-4">
-          <h3 class="text-[#7dd3fc] font-mono text-xs mb-3">// {t('matrix.runtime').toUpperCase()}</h3>
-          <div class="flex flex-wrap gap-2">
-            {portfolioData.technicalMatrix.runtime.map((lang) => (
-              <span class="text-[#94a3b8] text-xs px-2 py-1 bg-[#0c0e12] border border-[#334155] rounded">{lang}</span>
-            ))}
-          </div>
-        </div>
-        <div class="bg-[#161a22]/50 border border-[#334155] rounded-lg p-4">
-          <h3 class="text-[#7dd3fc] font-mono text-xs mb-3">// {t('matrix.frameworks').toUpperCase()}</h3>
-          <div class="flex flex-wrap gap-2">
-            {portfolioData.technicalMatrix.frameworks.map((fw) => (
-              <span class="text-[#94a3b8] text-xs px-2 py-1 bg-[#0c0e12] border border-[#334155] rounded">{fw}</span>
-            ))}
-          </div>
-        </div>
-        <div class="bg-[#161a22]/50 border border-[#334155] rounded-lg p-4">
-          <h3 class="text-[#7dd3fc] font-mono text-xs mb-3">// {t('matrix.infra').toUpperCase()}</h3>
-          <div class="flex flex-wrap gap-2">
-            {portfolioData.technicalMatrix.infrastructure.map((infra) => (
-              <span class="text-[#94a3b8] text-xs px-2 py-1 bg-[#0c0e12] border border-[#334155] rounded">{infra}</span>
-            ))}
-          </div>
-        </div>
-      </div>
     </div>
-  </section>
-  
-  <!-- About Section -->
-  <section id="about" class="py-16 px-4 bg-[#161a22]/30">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-[#f8fafc] text-2xl md:text-3xl mb-6 flex items-center gap-3">
-        <span class="text-[#7dd3fc] font-mono text-sm">02 //</span>
-        {t('section.chronicle').replace('02 // ', '')}
-      </h2>
-      
-      <!-- Philosophy Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div class="bg-[#161a22]/50 border border-[#334155] rounded-lg p-6">
-          <h3 class="text-[#7dd3fc] font-mono text-sm mb-3">{t('about.philosophy')}</h3>
-          <p class="text-[#94a3b8] leading-relaxed">{t('about.philosophy.text')}</p>
+    <div class="lg:col-span-4 flex flex-col gap-3">
+      <div class="flex flex-wrap gap-3">
+        <a class="flex-1 min-w-[140px] px-5 py-3 rounded bg-surface-container text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors text-center font-label-md text-label-md font-medium shadow-sm flex items-center justify-center gap-2" href="#projects">
+          <span class="material-symbols-outlined text-[18px]">terminal</span>
+          View Work
+        </a>
+        <a class="flex-1 min-w-[140px] px-5 py-3 rounded bg-primary text-on-primary hover:bg-primary-fixed-dim transition-colors text-center font-label-md text-label-md font-semibold flex items-center justify-center gap-2 shadow-sm" href="#contact">
+          <span class="material-symbols-outlined text-[18px]">send</span>
+          Get in Touch
+        </a>
+      </div>
+      <a class="w-full px-5 py-2.5 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors text-center font-code text-code flex items-center justify-center gap-2" href="#">
+        <span class="material-symbols-outlined text-[16px]">description</span>
+        Download Structured CV [.PDF]
+      </a>
+    </div>
+  </div>
+
+  <!-- metrics bento -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+    <div class="flex flex-col p-4 bg-surface-container-low rounded">
+      <div class="flex items-center justify-between mb-2">
+        <span class="font-code text-label-sm text-outline">EXPERIENCE</span>
+        <span class="material-symbols-outlined text-primary text-[18px]">verified</span>
+      </div>
+      <span class="font-display text-headline-lg text-on-surface font-semibold">2+ Years</span>
+      <span class="font-body-sm text-body-sm text-on-surface-variant mt-1">High-throughput software & automated cloud</span>
+    </div>
+    <div class="flex flex-col p-4 bg-surface-container-low rounded">
+      <div class="flex items-center justify-between mb-2">
+        <span class="font-code text-label-sm text-outline">RESEARCH AFFILIATION</span>
+        <span class="material-symbols-outlined text-primary text-[18px]">memory</span>
+      </div>
+      <span class="font-headline-md text-headline-md text-on-surface font-semibold">BSC (Supercomputing)</span>
+      <span class="font-body-sm text-body-sm text-on-surface-variant mt-1">National supercomputing infrastructure</span>
+    </div>
+    <div class="flex flex-col p-4 bg-surface-container-low rounded">
+      <div class="flex items-center justify-between mb-2">
+        <span class="font-code text-label-sm text-outline">GENOMICS DEPLOYMENT</span>
+        <span class="material-symbols-outlined text-primary text-[18px]">biotech</span>
+      </div>
+      <span class="font-headline-md text-headline-md text-on-surface font-semibold">IRB Barcelona</span>
+      <span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Bioinformatics pipelines & job orchestration</span>
+    </div>
+    <div class="flex flex-col p-4 bg-surface-container-low rounded">
+      <div class="flex items-center justify-between mb-2">
+        <span class="font-code text-label-sm text-outline">CORE DISCIPLINE</span>
+        <span class="material-symbols-outlined text-primary text-[18px]">data_object</span>
+      </div>
+      <span class="font-headline-md text-headline-md text-on-surface font-semibold">Golang • Python</span>
+      <span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Cloud/DevOps & Bare-Metal KVM</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ SECTION 01 · ABOUT ═══ -->
+<section class="w-full bg-surface-container-lowest py-20 px-6 lg:px-12" id="about">
+<div class="max-w-7xl mx-auto">
+  <div class="flex items-center gap-3 mb-4">
+    <span class="font-code text-label-md text-primary tracking-widest uppercase">01 // Architecture & Focus</span>
+    <div class="h-0.5 w-12 bg-surface-variant"></div>
+  </div>
+  <h2 class="font-headline-lg text-headline-lg text-on-surface font-semibold mb-12">
+    Systems Philosophy & Core Competencies
+  </h2>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <!-- LEFT: narrative panel -->
+    <div class="lg:col-span-7 flex flex-col gap-6">
+      <div class="p-8 rounded-xl bg-surface-container-low shadow-sm flex flex-col gap-6">
+        <div class="flex items-center justify-between">
+          <span class="font-code text-code text-on-surface-variant">// Executive Statement</span>
+          <span class="font-code text-label-sm text-primary uppercase">Mission Profile</span>
         </div>
-        <div class="bg-[#161a22]/50 border border-[#334155] rounded-lg p-6">
-          <h3 class="text-[#7dd3fc] font-mono text-sm mb-3">{t('about.learning')}</h3>
-          <p class="text-[#94a3b8] leading-relaxed">{t('about.learning.text')}</p>
-        </div>
-      </div>
-      
-      <div class="text-[#94a3b8] space-y-4 leading-relaxed">
-        <p>{t('hero.subtitle')}</p>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Experience & Studies Grid -->
-  <section class="py-16 px-4">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-      <TimelineSection 
-        sectionId="experience" 
-        sectionTitle={t('timeline.work')} 
-        items={experienceItems} 
-      />
-      <TimelineSection 
-        sectionId="studies" 
-        sectionTitle={t('timeline.education')} 
-        items={studiesItems} 
-      />
-    </div>
-  </section>
-  
-  <!-- Projects Section -->
-  <section id="projects" class="py-16 px-4 bg-[#161a22]/30">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-[#f8fafc] text-2xl md:text-3xl mb-8 text-center flex items-center justify-center gap-3">
-        <span class="text-[#7dd3fc] font-mono text-sm">03 //</span>
-        {t('section.artifacts').replace('03 // ', '')}
-      </h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {portfolioData.projects.map((project) => (
-          <ProjectCard project={project} t={t} />
-        ))}
-      </div>
-    </div>
-  </section>
-  
-  <!-- Contact Section -->
-  <section id="contact" class="py-16 px-4">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-[#f8fafc] text-2xl md:text-3xl mb-8 text-center">
-        {t('dispatch.title')}
-      </h2>
-      <div class="bg-[#161a22]/80 border border-[#334155] rounded-lg p-8">
-        <p class="text-[#94a3b8] text-center mb-6">
-          {t('dispatch.subtitle')}
+        <p class="font-body-lg text-body-lg text-on-surface leading-relaxed">
+          Hello! I'm a passionate Full Stack Developer with 2 years of experience in building innovative software solutions. My journey into development began with a desire to create my own software, which led me to dive deep into the world of coding and problem-solving.
         </p>
-        <div class="flex justify-center gap-6">
-          <a 
-            href={portfolioData.contact.github} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="text-[#94a3b8] hover:text-[#7dd3fc] transition-colors"
-            aria-label="GitHub Profile"
-          >
-            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-              <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
-            </svg>
-          </a>
-          <a 
-            href={portfolioData.contact.linkedin} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="text-[#94a3b8] hover:text-[#7dd3fc] transition-colors"
-            aria-label="LinkedIn Profile"
-          >
-            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-              <path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/>
-            </svg>
-          </a>
-          <a 
-            href={portfolioData.contact.twitter} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="text-[#94a3b8] hover:text-[#7dd3fc] transition-colors"
-            aria-label="X (Twitter) Profile"
-          >
-            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-            </svg>
-          </a>
-          <a 
-            href={`mailto:${portfolioData.contact.email}`} 
-            class="text-[#94a3b8] hover:text-[#7dd3fc] transition-colors"
-            aria-label="Email Address"
-          >
-            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z"/>
-              <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"/>
-            </svg>
-          </a>
+        <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          At the intersection of life sciences and computational systems, I specialize in architecting bioinformatics analysis platforms, container orchestration clusters, and high-density virtualization setups. I have designed private cloud infrastructures leveraging KVM and Docker to manage autonomous VPCs, multi-tenant virtual machines, and low-latency storage fabrics.
+        </p>
+
+        <!-- highlight callout -->
+        <div class="p-5 rounded bg-surface-container flex items-start gap-4">
+          <span class="material-symbols-outlined text-primary text-[24px] mt-0.5">terminal</span>
+          <div class="flex flex-col gap-1">
+            <span class="font-headline-sm text-headline-sm text-on-surface font-medium">Private Cloud & High-Throughput Storage</span>
+            <span class="font-body-sm text-body-sm text-on-surface-variant">
+              Engineered proprietary virtualization fabrics using bare-metal KVM hypervisors, isolated VLAN bridges, and programmatic container life-cycle management for research pipelines.
+            </span>
+          </div>
+        </div>
+
+        <!-- interests -->
+        <div class="pt-4 mt-2">
+          <span class="font-code text-label-sm text-outline uppercase tracking-wider block mb-3">Offline Pursuits & Cadence</span>
+          <div class="grid grid-cols-3 gap-3">
+            <div class="flex items-center gap-2 p-3 rounded bg-surface-container">
+              <span class="material-symbols-outlined text-tertiary text-[20px]">sports_soccer</span>
+              <span class="font-label-md text-label-md text-on-surface">Football</span>
+            </div>
+            <div class="flex items-center gap-2 p-3 rounded bg-surface-container">
+              <span class="material-symbols-outlined text-error text-[20px]">sports_score</span>
+              <span class="font-label-md text-label-md text-on-surface">MotoGP & F1</span>
+            </div>
+            <div class="flex items-center gap-2 p-3 rounded bg-surface-container">
+              <span class="material-symbols-outlined text-primary text-[20px]">photo_camera</span>
+              <span class="font-label-md text-label-md text-on-surface">Photography</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </section>
-  
-  <!-- Footer -->
-  <footer class="py-8 px-4 border-t border-[#334155]">
-    <div class="max-w-6xl mx-auto text-center">
-      <p class="text-[#94a3b8] text-sm mb-2">
-        © {new Date().getFullYear()} {portfolioData.name}. {t('footer.credit')}
-      </p>
-      <!-- Language Switcher -->
-      <div class="flex justify-center gap-4 mt-4">
-        <a href={Astro.url.pathname + '?lang=en'} class:list={['text-sm transition-colors', lang === 'en' ? 'text-[#f8fafc] font-medium' : 'text-[#7dd3fc] hover:text-[#f8fafc]']}>English</a>
-        <span class="text-[#334155]">|</span>
-        <a href={Astro.url.pathname + '?lang=es'} class:list={['text-sm transition-colors', lang === 'es' ? 'text-[#f8fafc] font-medium' : 'text-[#7dd3fc] hover:text-[#f8fafc]']}>Español</a>
-        <span class="text-[#334155]">|</span>
-        <a href={Astro.url.pathname + '?lang=ca'} class:list={['text-sm transition-colors', lang === 'ca' ? 'text-[#f8fafc] font-medium' : 'text-[#7dd3fc] hover:text-[#f8fafc]']}>Català</a>
+
+    <!-- RIGHT: stack categories -->
+    <div class="lg:col-span-5 flex flex-col gap-4">
+      <div class="p-6 rounded-xl bg-surface-container-low shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-code text-label-sm text-primary uppercase">01 / Runtime Languages</span>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px]">code</span>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1.5 rounded bg-surface-container text-on-surface font-code text-code">Python</span>
+          <span class="px-3 py-1.5 rounded bg-surface-container text-primary font-code text-code font-medium">Golang</span>
+          <span class="px-3 py-1.5 rounded bg-surface-container text-on-surface font-code text-code">TypeScript</span>
+          <span class="px-3 py-1.5 rounded bg-surface-container text-on-surface font-code text-code">JavaScript</span>
+          <span class="px-3 py-1.5 rounded bg-surface-container text-on-surface font-code text-code">SQL (PostgreSQL/SQLite)</span>
+        </div>
+      </div>
+      <div class="p-6 rounded-xl bg-surface-container-low shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-code text-label-sm text-primary uppercase">02 / Frameworks & Engines</span>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px]">layers</span>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1.5 rounded bg-surface-container text-on-surface font-code text-code">FastAPI</span>
+          <span class="px-3 py-1.5 rounded bg-surface-container text-on-surface font-code text-code">Flask</span>
+          <span class="px-3 py-1.5 rounded bg-surface-container text-on-surface font-code text-code">Node.js</span>
+          <span class="px-3 py-1.5 rounded bg-surface-container text-on-surface font-code text-code">Astro</span>
+          <span class="px-3 py-1.5 rounded bg-surface-container text-on-surface font-code text-code">React</span>
+          <span class="px-3 py-1.5 rounded bg-surface-container text-on-surface font-code text-code">Laravel</span>
+        </div>
+      </div>
+      <div class="p-6 rounded-xl bg-surface-container-low shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-code text-label-sm text-primary uppercase">03 / Platform, Cloud & Infra</span>
+          <span class="material-symbols-outlined text-on-surface-variant text-[20px]">cloud</span>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1.5 rounded bg-surface-container text-primary font-code text-code font-medium">Docker</span>
+          <span class="px-3 py-1.5 rounded bg-surface-container text-on-surface font-code text-code">AWS (EC2, S3, IAM)</span>
+          <span class="px-3 py-1.5 rounded bg-surface-container text-on-surface font-code text-code">KVM Hypervisor</span>
+          <span class="px-3 py-1.5 rounded bg-surface-container text-on-surface font-code text-code">Linux Kernel / Bash</span>
+          <span class="px-3 py-1.5 rounded bg-surface-container text-on-surface font-code text-code">CI/CD Pipelines</span>
+        </div>
       </div>
     </div>
-  </footer>
+  </div>
+</div>
+</section>
+
+<!-- ═══ SECTION 02 · EXPERIENCE ═══ -->
+<section class="w-full bg-surface py-20 px-6 lg:px-12" id="experience">
+<div class="max-w-7xl mx-auto">
+  <div class="flex items-center gap-3 mb-4">
+    <span class="font-code text-label-md text-primary tracking-widest uppercase">02 // Chronicle & Credentials</span>
+    <div class="h-0.5 w-12 bg-surface-variant"></div>
+  </div>
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-16">
+    <div>
+      <h2 class="font-headline-lg text-headline-lg text-on-surface font-semibold">
+        Institutional Track Record
+      </h2>
+      <p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-2xl">
+        Sustained contributions to national supercomputing centres, clinical biotechnology institutes, and rigorous academic credentials in systems administration.
+      </p>
+    </div>
+    <span class="font-code text-label-sm px-3 py-1.5 rounded bg-surface-container text-on-surface-variant self-start md:self-auto">
+      STATUS: IN PRODUCTION
+    </span>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+    <!-- WORK COLUMN -->
+    <div class="lg:col-span-7 flex flex-col gap-6">
+      <div class="flex items-center gap-2 pb-2">
+        <span class="material-symbols-outlined text-primary text-[22px]">domain</span>
+        <h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Work Experience</h3>
+      </div>
+      <div class="flex flex-col gap-4">
+
+        <!-- FEATURED job card -->
+        <div class="p-6 rounded-xl bg-surface-container-low shadow-sm relative overflow-hidden">
+          <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+            <div>
+              <h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Full Stack & DevOps</h4>
+              <p class="font-body-md text-body-md text-primary font-medium">Barcelona Supercomputing Center (BSC)</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+              <span class="px-2.5 py-1 rounded bg-surface-container text-primary font-code text-label-sm font-semibold">Jun 2024 – Present</span>
+            </div>
+          </div>
+          <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Spearheading full-lifecycle bioinformatics tooling deployment and automated cloud provisioning. Managing automated database migrations, continuous integration testbeds, and custom internal command generation for large-scale genetic pipelines.
+          </p>
+          <div class="mt-4 pt-4 flex flex-wrap items-center gap-2">
+            <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-outline">Python</span>
+            <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-outline">Golang</span>
+            <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-outline">Docker</span>
+            <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-outline">HPC Systems</span>
+          </div>
+        </div>
+
+        <!-- STANDARD job card -->
+        <div class="p-6 rounded-xl bg-surface-container-low shadow-sm">
+          <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+            <div>
+              <h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Full Stack Developer</h4>
+              <p class="font-body-md text-body-md text-secondary font-medium">Institut de Recerca Biomèdica (IRB Barcelona)</p>
+            </div>
+            <span class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant font-code text-label-sm">Jun 2023 – Jun 2024</span>
+          </div>
+          <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Engineered programmatic interfaces for genomic data extraction and pipeline monitoring. Developed full-stack modules that interface directly with distributed computational arrays to execute sequence alignments and mutation analysis.
+          </p>
+          <div class="mt-4 pt-4 flex flex-wrap items-center gap-2">
+            <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-outline">FastAPI</span>
+            <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-outline">PostgreSQL</span>
+            <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-outline">AWS</span>
+            <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-outline">Bioinformatics</span>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-xl bg-surface-container-low shadow-sm">
+          <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+            <div>
+              <h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Developer Intern</h4>
+              <p class="font-body-md text-body-md text-secondary font-medium">Barcelona Supercomputing Center (BSC)</p>
+            </div>
+            <span class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant font-code text-label-sm">Jan 2023 – Jun 2023</span>
+          </div>
+          <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Contributed to internal workflow automation tools, containerized build matrices, and preliminary bioinformatics dataset cleaning procedures.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-xl bg-surface-container-low shadow-sm">
+          <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+            <div>
+              <h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold">IT Technician</h4>
+              <p class="font-body-md text-body-md text-secondary font-medium">Jesuïtes de Sarrià</p>
+            </div>
+            <span class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant font-code text-label-sm">Jan 2019 – Jun 2019</span>
+          </div>
+          <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Local area network deployment, hardware diagnostics, workstation orchestration, and active directory maintenance for academic campuses.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDUCATION COLUMN -->
+    <div class="lg:col-span-5 flex flex-col gap-6">
+      <div class="flex items-center gap-2 pb-2">
+        <span class="material-symbols-outlined text-primary text-[22px]">school</span>
+        <h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Formal Education</h3>
+      </div>
+      <div class="flex flex-col gap-4">
+        <div class="p-6 rounded-xl bg-surface-container-low shadow-sm flex flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <span class="font-code text-code text-primary font-semibold">ASIX</span>
+            <span class="font-code text-label-sm text-on-surface-variant">Sep 2023 – Jun 2024</span>
+          </div>
+          <h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Systems Administration & Cloud</h4>
+          <p class="font-body-sm text-body-sm text-secondary">Jesuïtes de Sarrià</p>
+          <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Advanced operating systems administration, network design, high-availability clusters, virtualization (KVM, Proxmox), enterprise storage, and security architectures.
+          </p>
+        </div>
+        <div class="p-6 rounded-xl bg-surface-container-low shadow-sm flex flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <span class="font-code text-code text-primary font-semibold">DAW (Bioinformatics Profile)</span>
+            <span class="font-code text-label-sm text-on-surface-variant">Sep 2021 – Jun 2023</span>
+          </div>
+          <h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Web Application Development</h4>
+          <p class="font-body-sm text-body-sm text-secondary">Jesuïtes de Sarrià & Research Centers</p>
+          <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Dual-curriculum specialization combining modern web architecture, distributed backends, and algorithmic computational biology for genetic data processing.
+          </p>
+        </div>
+        <div class="p-6 rounded-xl bg-surface-container-low shadow-sm flex flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <span class="font-code text-code text-primary font-semibold">SMX</span>
+            <span class="font-code text-label-sm text-on-surface-variant">Sep 2019 – Jun 2021</span>
+          </div>
+          <h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Microcomputer Systems & Networks</h4>
+          <p class="font-body-sm text-body-sm text-secondary">Jesuïtes de Sarrià</p>
+          <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Foundations of computer hardware architecture, network protocols, server maintenance, and operational infrastructure configuration.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ SECTION 03 · PROJECTS ═══ -->
+<section class="w-full bg-surface-container-lowest py-20 px-6 lg:px-12" id="projects">
+<div class="max-w-7xl mx-auto">
+  <div class="flex items-center gap-3 mb-4">
+    <span class="font-code text-label-md text-primary tracking-widest uppercase">03 // Artifacts & Codebases</span>
+    <div class="h-0.5 w-12 bg-surface-variant"></div>
+  </div>
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+    <div>
+      <h2 class="font-headline-lg text-headline-lg text-on-surface font-semibold">
+        Featured Systems & Deployments
+      </h2>
+      <p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-2xl">
+        Selected bioinformatic instruments, sovereign virtualization platforms, and zero-dependency CLI utilities built for production resilience.
+      </p>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="font-code text-code text-outline">DISPLAYING 6 VERIFIED REPOSITORIES</span>
+    </div>
+  </div>
+
+  <!-- project grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="p-6 rounded-xl bg-surface-container-low shadow-sm flex flex-col justify-between hover:bg-surface-container transition-all group">
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-code text-label-sm text-primary uppercase">CAPSTONE // BIOINFORMATICS</span>
+          <span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">psychology</span>
+        </div>
+        <h3 class="font-headline-md text-headline-md text-on-surface font-semibold mb-2 group-hover:text-primary transition-colors">
+          Doctor AI
+        </h3>
+        <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed mb-6">
+          Final DAW project: Comprehensive portal featuring computational bioinformatic utilities coded natively in Golang for parsing large-scale genetic sequence files, combined with Deep Learning inference models to detect malignancies in lung scans.
+        </p>
+      </div>
+      <div>
+        <div class="flex flex-wrap gap-1.5 mb-5">
+          <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-on-surface-variant">Golang</span>
+          <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-on-surface-variant">Deep Learning</span>
+          <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-primary">Bioinformatics</span>
+        </div>
+        <a class="inline-flex items-center gap-2 font-code text-code text-on-surface hover:text-primary transition-colors" href="https://github.com/arnaualbert" rel="noopener noreferrer" target="_blank">
+          <span class="material-symbols-outlined text-[16px]">code</span>
+          Inspect Codebase →
+        </a>
+      </div>
+    </div>
+
+    <div class="p-6 rounded-xl bg-surface-container-low shadow-sm flex flex-col justify-between hover:bg-surface-container transition-all group">
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-code text-label-sm text-primary uppercase">PRODUCTION // BSC + IRB</span>
+          <span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">hub</span>
+        </div>
+        <h3 class="font-headline-md text-headline-md text-on-surface font-semibold mb-2 group-hover:text-primary transition-colors">
+          Samplexer
+        </h3>
+        <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed mb-6">
+          Mission-critical internal orchestration application deployed across BSC, IRB, and AWS cloud clusters. Dynamically generates high-throughput pipeline commands, orchestrates bioinformatic job tracking, and conducts automated relational database synchronization.
+        </p>
+      </div>
+      <div>
+        <div class="flex flex-wrap gap-1.5 mb-5">
+          <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-on-surface-variant">Python</span>
+          <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-on-surface-variant">AWS</span>
+          <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-primary">DevOps</span>
+        </div>
+        <a class="inline-flex items-center gap-2 font-code text-code text-on-surface hover:text-primary transition-colors" href="https://github.com/arnaualbert" rel="noopener noreferrer" target="_blank">
+          <span class="material-symbols-outlined text-[16px]">terminal</span>
+          System Specification →
+        </a>
+      </div>
+    </div>
+
+    <div class="p-6 rounded-xl bg-surface-container-low shadow-sm flex flex-col justify-between hover:bg-surface-container transition-all group">
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-code text-label-sm text-primary uppercase">INFRASTRUCTURE // VIRTUALIZATION</span>
+          <span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">dns</span>
+        </div>
+        <h3 class="font-headline-md text-headline-md text-on-surface font-semibold mb-2 group-hover:text-primary transition-colors">
+          Cracks
+        </h3>
+        <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed mb-6">
+          Personal cloud computing platform architected to manage isolated VPCs, bare-metal KVM virtual machines, dynamic Docker container workloads, and high-volume S3-compatible cloud storage nodes without external SaaS dependencies.
+        </p>
+      </div>
+      <div>
+        <div class="flex flex-wrap gap-1.5 mb-5">
+          <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-on-surface-variant">Docker</span>
+          <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-on-surface-variant">KVM</span>
+          <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-on-surface-variant">Cloud</span>
+          <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-primary">Linux</span>
+        </div>
+        <a class="inline-flex items-center gap-2 font-code text-code text-on-surface hover:text-primary transition-colors" href="https://github.com/arnaualbert" rel="noopener noreferrer" target="_blank">
+          <span class="material-symbols-outlined text-[16px]">cloud_circle</span>
+          Inspect Architecture →
+        </a>
+      </div>
+    </div>
+
+    <div class="p-6 rounded-xl bg-surface-container-low shadow-sm flex flex-col justify-between hover:bg-surface-container transition-all group">
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-code text-label-sm text-primary uppercase">UTILITY // LOW FOOTPRINT</span>
+          <span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">schedule</span>
+        </div>
+        <h3 class="font-headline-md text-headline-md text-on-surface font-semibold mb-2 group-hover:text-primary transition-colors">
+          TicTac Scheduler
+        </h3>
+        <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed mb-6">
+          Ultra-lightweight CLI task and batch job scheduler written in pure Golang. Operates as a completely zero-dependency single binary relying strictly on an embedded SQLite3 driver for durable ACID job tracking across heterogeneous environments.
+        </p>
+      </div>
+      <div>
+        <div class="flex flex-wrap gap-1.5 mb-5">
+          <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-primary">Golang</span>
+          <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-on-surface-variant">SQLite3</span>
+          <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-on-surface-variant">CLI Tooling</span>
+        </div>
+        <a class="inline-flex items-center gap-2 font-code text-code text-on-surface hover:text-primary transition-colors" href="https://github.com/arnaualbert" rel="noopener noreferrer" target="_blank">
+          <span class="material-symbols-outlined text-[16px]">terminal</span>
+          Source & Release →
+        </a>
+      </div>
+    </div>
+
+    <div class="p-6 rounded-xl bg-surface-container-low shadow-sm flex flex-col justify-between hover:bg-surface-container transition-all group">
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-code text-label-sm text-primary uppercase">INTERFACE // EDITORIAL WEB</span>
+          <span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">web</span>
+        </div>
+        <h3 class="font-headline-md text-headline-md text-on-surface font-semibold mb-2 group-hover:text-primary transition-colors">
+          Personal Site & Portfolio
+        </h3>
+        <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed mb-6">
+          Modern executive digital footprint engineered strictly with semantic HTML, modular Tailwind styling, and Astro static generation for sub-50ms Time-to-First-Byte performance and zero client runtime overhead.
+        </p>
+      </div>
+      <div>
+        <div class="flex flex-wrap gap-1.5 mb-5">
+          <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-on-surface-variant">Astro</span>
+          <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-on-surface-variant">TypeScript</span>
+          <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-primary">TailwindCSS</span>
+        </div>
+        <a class="inline-flex items-center gap-2 font-code text-code text-on-surface hover:text-primary transition-colors" href="https://github.com/arnaualbert" rel="noopener noreferrer" target="_blank">
+          <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+          View Repository →
+        </a>
+      </div>
+    </div>
+
+    <div class="p-6 rounded-xl bg-surface-container-low shadow-sm flex flex-col justify-between hover:bg-surface-container transition-all group">
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-code text-label-sm text-primary uppercase">DEV WORKFLOW // AUTOMATION</span>
+          <span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">rocket_launch</span>
+        </div>
+        <h3 class="font-headline-md text-headline-md text-on-surface font-semibold mb-2 group-hover:text-primary transition-colors">
+          Tasty Venus
+        </h3>
+        <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed mb-6">
+          Continuous deployment pipeline experiment validating frictionless continuous integration on GitHub Pages utilizing Astro, TypeScript, and modern component hydration techniques under strict security headers.
+        </p>
+      </div>
+      <div>
+        <div class="flex flex-wrap gap-1.5 mb-5">
+          <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-on-surface-variant">Astro</span>
+          <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-on-surface-variant">TypeScript</span>
+          <span class="px-2 py-0.5 rounded bg-surface-container font-code text-label-sm text-primary">CI/CD</span>
+        </div>
+        <a class="inline-flex items-center gap-2 font-code text-code text-on-surface hover:text-primary transition-colors" href="https://github.com/arnaualbert" rel="noopener noreferrer" target="_blank">
+          <span class="material-symbols-outlined text-[16px]">account_tree</span>
+          Workflow Spec →
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ SECTION 04 · CONTACT ═══ -->
+<section class="w-full bg-surface py-20 px-6 lg:px-12" id="contact">
+<div class="max-w-7xl mx-auto">
+  <div class="flex items-center gap-3 mb-4">
+    <span class="font-code text-label-md text-primary tracking-widest uppercase">04 // Secure Communications</span>
+    <div class="h-0.5 w-12 bg-surface-variant"></div>
+  </div>
+  <h2 class="font-headline-lg text-headline-lg text-on-surface font-semibold mb-12">
+    Initiate Technical Inquiry
+  </h2>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+
+    <!-- LEFT: social rows + location -->
+    <div class="lg:col-span-5 flex flex-col justify-between">
+      <div class="flex flex-col gap-6">
+        <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+          Whether you are architecting a mission-critical bioinformatics platform, orchestrating multi-region cloud systems, or hiring a high-agency full-stack engineer, submit a direct transmission.
+        </p>
+        <div class="flex flex-col gap-3">
+          <span class="font-code text-label-sm text-outline uppercase tracking-wider">Direct Coordinates</span>
+          <a class="flex items-center justify-between p-4 rounded bg-surface-container-low hover:bg-surface-container transition-colors group" href="https://github.com/arnaualbert" rel="noopener noreferrer" target="_blank">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">terminal</span>
+              <div>
+                <div class="font-label-md text-label-md text-on-surface font-medium">GitHub</div>
+                <div class="font-code text-body-sm text-outline">github.com/arnaualbert</div>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[18px]">arrow_outward</span>
+          </a>
+          <a class="flex items-center justify-between p-4 rounded bg-surface-container-low hover:bg-surface-container transition-colors group" href="https://linkedin.com/in/arnau-albert-sánchez-81211826b/" rel="noopener noreferrer" target="_blank">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">badge</span>
+              <div>
+                <div class="font-label-md text-label-md text-on-surface font-medium">LinkedIn</div>
+                <div class="font-code text-body-sm text-outline">linkedin.com/in/arnau-albert-sánchez</div>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[18px]">arrow_outward</span>
+          </a>
+          <a class="flex items-center justify-between p-4 rounded bg-surface-container-low hover:bg-surface-container transition-colors group" href="https://x.com/arnaualbert2003" rel="noopener noreferrer" target="_blank">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">alternate_email</span>
+              <div>
+                <div class="font-label-md text-label-md text-on-surface font-medium">X (Formerly Twitter)</div>
+                <div class="font-code text-body-sm text-outline">@arnaualbert2003</div>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[18px]">arrow_outward</span>
+          </a>
+        </div>
+      </div>
+      <div class="p-4 rounded bg-surface-container-low mt-8 flex items-center gap-4">
+        <span class="material-symbols-outlined text-primary text-[28px]">pin_drop</span>
+        <div class="flex flex-col">
+          <span class="font-label-md text-label-md text-on-surface font-semibold">Barcelona, Catalonia (ES)</span>
+          <span class="font-code text-body-sm text-outline">CET (UTC+1 / UTC+2) • Available for hybrid or remote</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: form -->
+    <div class="lg:col-span-7">
+      <div class="p-8 rounded-xl bg-surface-container-low shadow-sm">
+        <div class="flex items-center justify-between mb-6 pb-4">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+            <span class="font-code text-label-md text-on-surface font-medium uppercase">Direct Dispatch Terminal</span>
+          </div>
+          <span class="font-code text-label-sm text-outline">PGP: OPTIONAL</span>
+        </div>
+
+        <form class="flex flex-col gap-5" id="contactForm" onsubmit="event.preventDefault(); handleTransmission();">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="flex flex-col gap-2">
+              <label class="font-code text-label-sm text-on-surface-variant uppercase" for="contact-name">Your Name</label>
+              <input class="w-full px-4 py-3 rounded bg-surface text-on-surface font-body-md text-body-md placeholder-outline focus:outline-none focus:ring-1 focus:ring-primary shadow-sm" id="contact-name" placeholder="Dr. Jane Doe / Eng Director" required type="text"/>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label class="font-code text-label-sm text-on-surface-variant uppercase" for="contact-email">Direct Email</label>
+              <input class="w-full px-4 py-3 rounded bg-surface text-on-surface font-body-md text-body-md placeholder-outline focus:outline-none focus:ring-1 focus:ring-primary shadow-sm" id="contact-email" placeholder="contact@institute-or-corp.com" required type="email"/>
+            </div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <label class="font-code text-label-sm text-on-surface-variant uppercase" for="contact-subject">Subject Domain</label>
+            <select class="w-full px-4 py-3 rounded bg-surface text-on-surface font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-primary shadow-sm" id="contact-subject">
+              <option value="engineering">Full Stack / Bioinformatics Engineering Role</option>
+              <option value="devops">DevOps / Cloud Virtualization Consulting</option>
+              <option value="research">BSC / IRB Academic & Research Inquiries</option>
+              <option value="general">General Transmission / Networking</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-2">
+            <label class="font-code text-label-sm text-on-surface-variant uppercase" for="contact-message">Message / Project Parameters</label>
+            <textarea class="w-full px-4 py-3 rounded bg-surface text-on-surface font-body-md text-body-md placeholder-outline focus:outline-none focus:ring-1 focus:ring-primary shadow-sm resize-none" id="contact-message" placeholder="Describe system architecture, deployment scale, timeline, or engineering objectives..." required rows="5"></textarea>
+          </div>
+          <div class="flex items-center justify-between pt-2">
+            <span class="font-code text-body-sm text-primary" id="formFeedback"></span>
+            <button class="px-6 py-3 rounded bg-primary text-on-primary hover:bg-primary-fixed-dim transition-colors font-label-md text-label-md font-semibold flex items-center gap-2 shadow-sm ml-auto" id="submitBtn" type="submit">
+              <span class="material-symbols-outlined text-[18px]">send</span>
+              Dispatch Transmission
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ FORM SCRIPT ═══ -->
+<script>
+function handleTransmission(){
+  const btn=document.getElementById('submitBtn');
+  const feedback=document.getElementById('formFeedback');
+  const form=document.getElementById('contactForm');
+  btn.disabled=true;
+  btn.innerHTML='<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span> Routing packet...';
+  setTimeout(()=>{
+    btn.innerHTML='<span class="material-symbols-outlined text-[18px]">done</span> Transmitted';
+    btn.classList.remove('bg-primary');
+    btn.classList.add('bg-surface-container','text-on-surface');
+    feedback.textContent='Transmission acknowledged. Response within 24 standard hours.';
+    form.reset();
+    setTimeout(()=>{
+      btn.disabled=false;
+      btn.innerHTML='<span class="material-symbols-outlined text-[18px]">send</span> Dispatch Transmission';
+      btn.classList.remove('bg-surface-container','text-on-surface');
+      btn.classList.add('bg-primary','text-on-primary');
+    },4000);
+  },900);
+}
+</script>
+
+</div>
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="w-full bg-surface-container-lowest mt-space-xl">
+<div class="max-w-7xl mx-auto px-6 lg:px-12 py-space-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-space-lg">
+  <div class="flex flex-col gap-space-xs">
+    <div class="flex items-center gap-space-sm">
+      <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Arnau Albert Sánchez</span>
+      <span class="font-code text-code text-on-surface-variant">[Staff/Exec Suite]</span>
+    </div>
+    <p class="font-body-sm text-body-sm text-on-surface-variant">High-throughput cloud architecture, platform resilience, and full-lifecycle engineering leadership.</p>
+    <p class="font-label-sm text-label-sm text-outline mt-space-xs">© 2024 Arnau Albert Sánchez. All rights reserved.</p>
+  </div>
+  <div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-xl">
+    <div class="flex flex-col gap-space-xs">
+      <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Navigation</span>
+      <div class="flex flex-col gap-1">
+        <a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" data-path="about" href="#about">About & Core Stack</a>
+        <a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" data-path="experience" href="#experience">Engineering Leadership</a>
+        <a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" data-path="projects" href="#projects">Systems & Architecture</a>
+        <a class="font-body-sm text-body-sm text-outline hover:text-on-surface transition-colors" data-path="contact" href="#contact">Encrypted Contact</a>
+      </div>
+    </div>
+    <div class="flex flex-col gap-space-xs p-space-md rounded bg-surface-container-low min-w-[200px]">
+      <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">System Spec</span>
+      <div class="font-code text-code text-on-surface-variant flex flex-col gap-0.5">
+        <div class="flex justify-between gap-4"><span>Runtime:</span><span class="text-primary font-medium">Cloud Native</span></div>
+        <div class="flex justify-between gap-4"><span>Security:</span><span class="text-on-surface">Zero Trust</span></div>
+        <div class="flex justify-between gap-4"><span>Status:</span><span class="text-primary-container font-medium">Operational</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</footer>
+
 </BaseLayout>
