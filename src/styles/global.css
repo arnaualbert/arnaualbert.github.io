@@ -28,10 +28,12 @@ html {
 }
 
 body {
-  @apply bg-[#0c0e12] text-[#f8fafc] font-sans antialiased;
   min-height: 100vh;
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Typography - Geist for headings, Inter for body */
@@ -56,20 +58,22 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-[#141820];
+  background-color: #141820;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-[#222734] rounded-[4px];
+  background-color: #222734;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-[#3e484f];
+  background-color: #3e484f;
 }
 
 /* Selection color - Ice blue tint */
 ::selection {
-  @apply bg-[#38bdf8]/20 text-[#f8fafc];
+  background-color: rgba(56, 189, 248, 0.2);
+  color: #f8fafc;
 }
 
 /* Focus states - Sharp 1px outline, no blur */
@@ -87,50 +91,114 @@ body {
 
 /* Card elevation through tonal stepping */
 .card-surface {
-  @apply bg-[#141820] border border-[#222734] rounded-[4px];
+  background-color: #141820;
+  border: 1px solid #222734;
+  border-radius: 4px;
 }
 
 .card-surface-hover {
-  @apply card-surface transition-colors duration-200 hover:bg-[#1a1c20] hover:border-[#3e484f];
+  background-color: #141820;
+  border: 1px solid #222734;
+  border-radius: 4px;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.card-surface-hover:hover {
+  background-color: #1a1c20;
+  border-color: #3e484f;
 }
 
 /* Terminal/Code block styling */
 .terminal-block {
-  @apply bg-[#0c0e12] border border-[#222734] rounded-[4px] p-4 font-mono text-sm;
+  background-color: #0c0e12;
+  border: 1px solid #222734;
+  border-radius: 4px;
+  padding: 1rem;
+  font-family: 'Geist Mono', 'Fira Code', monospace;
+  font-size: 0.875rem;
 }
 
 /* Chip/Status marker styling */
 .chip {
-  @apply inline-flex items-center px-2 py-0.5 rounded-[4px] text-[11px] font-medium uppercase tracking-wider;
-  @apply bg-[#141820] border border-[#222734] text-[#94a3b8];
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: #141820;
+  border: 1px solid #222734;
+  color: #94a3b8;
 }
 
 .chip-active {
-  @apply border-[#38bdf8] text-[#38bdf8];
+  border-color: #38bdf8;
+  color: #38bdf8;
 }
 
 /* Button variants */
 .btn-primary {
-  @apply bg-[#1e293b] text-[#f8fafc] border border-[#38bdf8] rounded-[4px] px-4 py-2;
-  @apply font-medium transition-colors duration-200;
-  @apply hover:bg-[#243046] hover:text-[#38bdf8];
+  background-color: #1e293b;
+  color: #f8fafc;
+  border: 1px solid #38bdf8;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #243046;
+  color: #38bdf8;
 }
 
 .btn-secondary {
-  @apply bg-[#141820] text-[#94a3b8] border border-[#222734] rounded-[4px] px-4 py-2;
-  @apply font-medium transition-colors duration-200;
-  @apply hover:border-[#475569] hover:text-[#f8fafc];
+  background-color: #141820;
+  color: #94a3b8;
+  border: 1px solid #222734;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.btn-secondary:hover {
+  border-color: #475569;
+  color: #f8fafc;
 }
 
 .btn-ghost {
-  @apply bg-transparent text-[#94a3b8] rounded-[4px] px-4 py-2;
-  @apply font-medium transition-colors duration-200;
-  @apply hover:text-[#f8fafc] hover:bg-[#141820];
+  background-color: transparent;
+  color: #94a3b8;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.btn-ghost:hover {
+  color: #f8fafc;
+  background-color: #141820;
 }
 
 /* Input fields */
 .input-terminal {
-  @apply bg-[#141820] border border-[#222734] rounded-[4px] px-3 py-2;
-  @apply text-[#f8fafc] placeholder-[#64748b] font-body text-sm;
-  @apply focus:border-[#38bdf8] focus:outline-none;
+  background-color: #141820;
+  border: 1px solid #222734;
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  color: #f8fafc;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 0.875rem;
+}
+
+.input-terminal::placeholder {
+  color: #64748b;
+}
+
+.input-terminal:focus {
+  border-color: #38bdf8;
+  outline: none;
 }
