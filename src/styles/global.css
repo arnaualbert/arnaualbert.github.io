@@ -1,204 +1,21 @@
 @import "tailwindcss";
 
-:root {
-  /* Executive Architectural Palette - Stitch Design System */
-  --color-bg-primary: #0c0e12;      /* Obsidian charcoal - Base Layer */
-  --color-bg-secondary: #141820;    /* Surface Tier - Cards & Panels */
-  --color-bg-tertiary: #1a1c20;     /* Surface Container Low */
-  --color-bg-elevated: #1e2024;     /* Surface Container */
-  
-  --color-text-primary: #f8fafc;    /* Optic white */
-  --color-text-secondary: #e2e8f0;  /* Muted parchment */
-  --color-text-muted: #94a3b8;      /* Slate metadata */
-  --color-text-dim: #64748b;        /* Placeholder text */
-  
-  --color-accent-primary: #38bdf8;  /* Ice blue - Primary functional emphasis */
-  --color-accent-secondary: #7bd0ff;/* Primary fixed dim */
-  --color-border: #222734;          /* Structural boundary borders */
-  --color-border-subtle: #3e484f;   /* Outline variant */
-  
-  /* Interactive states */
-  --color-focus: #38bdf8;
-  --color-hover-bg: #243046;
-  --color-active-bg: #1c222d;
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    overscroll-behavior: none;
+  }
+  main > :first-child {
+    margin-top: 0 !important;
+  }
+  main > :last-child {
+    margin-bottom: 0 !important;
+  }
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  min-height: 100vh;
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-primary);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  letter-spacing: -0.005em;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* Typography - Geist for headings, Inter for body */
-.font-display {
-  font-family: 'Geist', system-ui, -apple-system, sans-serif;
-  letter-spacing: -0.02em;
-}
-
-.font-body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  letter-spacing: -0.005em;
-}
-
-.font-mono {
-  font-family: 'Geist Mono', 'Fira Code', monospace;
-}
-
-/* Custom scrollbar - Technical terminal style */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background-color: #141820;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #222734;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: #3e484f;
-}
-
-/* Selection color - Ice blue tint */
-::selection {
-  background-color: rgba(56, 189, 248, 0.2);
-  color: #f8fafc;
-}
-
-/* Focus states - Sharp 1px outline, no blur */
-*:focus-visible {
-  outline: 1px solid var(--color-focus);
-  outline-offset: 2px;
-  border-radius: 4px;
-}
-
-/* Hairline borders - No blur, crisp edges */
-.border-hairline {
-  border-width: 1px;
-  border-color: var(--color-border);
-}
-
-/* Card elevation through tonal stepping */
-.card-surface {
-  background-color: #141820;
-  border: 1px solid #222734;
-  border-radius: 4px;
-}
-
-.card-surface-hover {
-  background-color: #141820;
-  border: 1px solid #222734;
-  border-radius: 4px;
-  transition: background-color 0.2s, border-color 0.2s;
-}
-
-.card-surface-hover:hover {
-  background-color: #1a1c20;
-  border-color: #3e484f;
-}
-
-/* Terminal/Code block styling */
-.terminal-block {
-  background-color: #0c0e12;
-  border: 1px solid #222734;
-  border-radius: 4px;
-  padding: 1rem;
-  font-family: 'Geist Mono', 'Fira Code', monospace;
-  font-size: 0.875rem;
-}
-
-/* Chip/Status marker styling */
-.chip {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.125rem 0.5rem;
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  background-color: #141820;
-  border: 1px solid #222734;
-  color: #94a3b8;
-}
-
-.chip-active {
-  border-color: #38bdf8;
-  color: #38bdf8;
-}
-
-/* Button variants */
-.btn-primary {
-  background-color: #1e293b;
-  color: #f8fafc;
-  border: 1px solid #38bdf8;
-  border-radius: 4px;
-  padding: 0.5rem 1rem;
-  font-weight: 500;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-.btn-primary:hover {
-  background-color: #243046;
-  color: #38bdf8;
-}
-
-.btn-secondary {
-  background-color: #141820;
-  color: #94a3b8;
-  border: 1px solid #222734;
-  border-radius: 4px;
-  padding: 0.5rem 1rem;
-  font-weight: 500;
-  transition: border-color 0.2s, color 0.2s;
-}
-
-.btn-secondary:hover {
-  border-color: #475569;
-  color: #f8fafc;
-}
-
-.btn-ghost {
-  background-color: transparent;
-  color: #94a3b8;
-  border-radius: 4px;
-  padding: 0.5rem 1rem;
-  font-weight: 500;
-  transition: color 0.2s, background-color 0.2s;
-}
-
-.btn-ghost:hover {
-  color: #f8fafc;
-  background-color: #141820;
-}
-
-/* Input fields */
-.input-terminal {
-  background-color: #141820;
-  border: 1px solid #222734;
-  border-radius: 4px;
-  padding: 0.5rem 0.75rem;
-  color: #f8fafc;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  font-size: 0.875rem;
-}
-
-.input-terminal::placeholder {
-  color: #64748b;
-}
-
-.input-terminal:focus {
-  border-color: #38bdf8;
-  outline: none;
+  display: none;
 }
