@@ -3,62 +3,29 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import TimelineSection from '../components/TimelineSection.astro';
+import { getTranslations, calculateYearsExperience } from '../i18n/utils';
+import { portfolioData } from '../data/portfolio';
 
-const experienceItems = [
-  { title: 'Full Stack & DevOps @ Barcelona Supercomputing Center (BSC)', period: 'Jun 2024 - Present' },
-  { title: 'Full Stack @ Institut Recerca Biomedica Barcelona (IRB)', period: 'Jun 2023 - Jun 2024' },
-  { title: 'Internship @ Barcelona Supercomputing Center (BSC)', period: 'Jan 2023 - Jun 2023' },
-  { title: 'IT Technician @ Jesuïtes de Sarrià', period: 'Jan 2019 - Jun 2019' },
-];
+// Get language from URL or default to English
+const lang = Astro.url.searchParams.get('lang') || 'en';
+const t = getTranslations(lang as keyof typeof import('../i18n/ui').ui);
 
-const studiesItems = [
-  { title: 'ASIX (Advanced Systems Administration)', period: 'Sep 2023 - Jun 2024' },
-  { title: 'DAW with Bioinformatics Profile', period: 'Sep 2021 - Jun 2023' },
-  { title: 'SMX (Microcomputer Systems and Networks)', period: 'Sep 2019 - Jun 2021' },
-];
+// Calculate years of experience dynamically
+const yearsExp = calculateYearsExperience(portfolioData.startYear);
 
-const projects = [
-  {
-    name: 'Doctor AI',
-    description: 'Bioinformatics platform with Golang tools for genetic file analysis and deep learning for lung cancer detection.',
-    github: 'https://github.com/arnaualbert/doctor_ai',
-  },
-  {
-    name: 'Samplexer',
-    description: 'Internal application deployed at BSC, IRB & AWS for generating bioinformatics commands, tracking jobs, and automatic database management.',
-  },
-  {
-    name: 'Portfolio',
-    description: 'Executive portfolio built with Astro, TypeScript, and Tailwind CSS, deployed on GitHub Pages.',
-    github: 'https://github.com/arnaualbert/arnaualbert.github.io',
-  },
-  {
-    name: 'TicTac Scheduler',
-    description: 'CLI task manager in Golang with SQLite3 for job tracking without external dependencies.',
-    github: 'https://github.com/arnaualbert/tictac_scheduler',
-  },
-  {
-    name: 'Cracks',
-    description: 'VPC management software that creates and manages KVM virtual machines, Docker containers, and cloud storage solutions.',
-    github: 'https://github.com/arnaualbert/cracks',
-  },
-  {
-    name: 'Tasty Venus',
-    description: 'Simple website built to practice Astro, TypeScript, and Tailwind CSS with GitHub Pages deployment.',
-    github: 'https://github.com/arnaualbert/tasty-venus',
-    demo: 'https://arnaualbert.github.io/tasty-venus/',
-  },
-];
+const experienceItems = portfolioData.workExperience.map(exp => ({
+  title: `${exp.role} @ ${exp.institution}`,
+  period: exp.period,
+}));
 
-const techStack = {
-  languages: ['Golang', 'Python', 'TypeScript', 'JavaScript', 'SQL'],
-  frameworks: ['Astro', 'React', 'FastAPI', 'Flask', 'Node.js', 'Laravel'],
-  infrastructure: ['Docker', 'KVM', 'AWS', 'DevOps', 'Cloud Services'],
-};
+const studiesItems = portfolioData.education.map(edu => ({
+  title: edu.degree,
+  period: edu.period,
+}));
 ---
 
-<BaseLayout title="Arnau Albert Sánchez | Full Stack Developer">
-  <Navbar />
+<BaseLayout title={`${portfolioData.name} | ${t('hero.title')}`} lang={lang}>
+  <Navbar lang={lang} />
   
   <!-- Hero Section -->
   <section id="hero" class="pt-32 pb-16 px-4 min-h-screen flex items-center">
@@ -66,45 +33,48 @@ const techStack = {
       <!-- Credibility Strip -->
       <div class="mb-8 p-4 bg-[#161a22]/80 border border-[#334155] rounded-lg">
         <div class="flex flex-wrap gap-4 items-center justify-center md:justify-start">
-          <span class="text-[#7dd3fc] font-mono text-sm">01 // ARCHITECTURE & FOCUS</span>
+          <span class="text-[#7dd3fc] font-mono text-sm">{t('section.architecture')}</span>
           <div class="hidden md:block w-px h-4 bg-[#334155]"></div>
-          <span class="text-[#94a3b8] text-sm">2+ Years Experience</span>
+          <span class="text-[#94a3b8] text-sm">{yearsExp}+ {t('credibility.experience')}</span>
           <div class="hidden md:block w-px h-4 bg-[#334155]"></div>
-          <span class="text-[#94a3b8] text-sm">BSC & IRB Barcelona</span>
+          <span class="text-[#94a3b8] text-sm">{portfolioData.affiliations.join(' & ')}</span>
           <div class="hidden md:block w-px h-4 bg-[#334155]"></div>
-          <span class="text-[#94a3b8] text-sm">Golang + Python + Cloud/DevOps</span>
+          <span class="text-[#94a3b8] text-sm">{portfolioData.coreStack.join(' + ')}</span>
         </div>
       </div>
       
       <h1 class="text-[#f8fafc] text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-        Arnau Albert Sánchez
+        {portfolioData.name}
       </h1>
       <h2 class="text-[#94a3b8] text-xl md:text-2xl mb-8">
-        Full Stack Developer & DevOps Engineer @ Barcelona
+        {t('hero.title')}
       </h2>
+      <p class="text-[#94a3b8] text-lg mb-8 max-w-3xl">
+        {t('hero.subtitle')}
+      </p>
       
       <!-- Technical Matrix -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-12">
         <div class="bg-[#161a22]/50 border border-[#334155] rounded-lg p-4">
-          <h3 class="text-[#7dd3fc] font-mono text-xs mb-3">// RUNTIME LANGUAGES</h3>
+          <h3 class="text-[#7dd3fc] font-mono text-xs mb-3">// {t('matrix.runtime').toUpperCase()}</h3>
           <div class="flex flex-wrap gap-2">
-            {techStack.languages.map((lang) => (
+            {portfolioData.technicalMatrix.runtime.map((lang) => (
               <span class="text-[#94a3b8] text-xs px-2 py-1 bg-[#0c0e12] border border-[#334155] rounded">{lang}</span>
             ))}
           </div>
         </div>
         <div class="bg-[#161a22]/50 border border-[#334155] rounded-lg p-4">
-          <h3 class="text-[#7dd3fc] font-mono text-xs mb-3">// FRAMEWORKS & ENGINES</h3>
+          <h3 class="text-[#7dd3fc] font-mono text-xs mb-3">// {t('matrix.frameworks').toUpperCase()}</h3>
           <div class="flex flex-wrap gap-2">
-            {techStack.frameworks.map((fw) => (
+            {portfolioData.technicalMatrix.frameworks.map((fw) => (
               <span class="text-[#94a3b8] text-xs px-2 py-1 bg-[#0c0e12] border border-[#334155] rounded">{fw}</span>
             ))}
           </div>
         </div>
         <div class="bg-[#161a22]/50 border border-[#334155] rounded-lg p-4">
-          <h3 class="text-[#7dd3fc] font-mono text-xs mb-3">// INFRASTRUCTURE</h3>
+          <h3 class="text-[#7dd3fc] font-mono text-xs mb-3">// {t('matrix.infra').toUpperCase()}</h3>
           <div class="flex flex-wrap gap-2">
-            {techStack.infrastructure.map((infra) => (
+            {portfolioData.technicalMatrix.infrastructure.map((infra) => (
               <span class="text-[#94a3b8] text-xs px-2 py-1 bg-[#0c0e12] border border-[#334155] rounded">{infra}</span>
             ))}
           </div>
@@ -118,25 +88,23 @@ const techStack = {
     <div class="max-w-4xl mx-auto">
       <h2 class="text-[#f8fafc] text-2xl md:text-3xl mb-6 flex items-center gap-3">
         <span class="text-[#7dd3fc] font-mono text-sm">02 //</span>
-        CHRONICLE & CREDENTIALS
+        {t('section.chronicle').replace('02 // ', '')}
       </h2>
-      <div class="text-[#94a3b8] space-y-4 leading-relaxed">
-        <p>Hello! I'm a passionate Full Stack Developer with 2+ years of experience building innovative software solutions at prestigious institutions like Barcelona Supercomputing Center and IRB Barcelona.</p>
-        <p>My journey began with a desire to create my own software, leading me to dive deep into coding and problem-solving across multiple domains.</p>
-        
-        <div class="space-y-3 my-6">
-          <div class="pl-4 border-l-2 border-[#7dd3fc]/50">
-            <p class="text-[#f8fafc] font-medium">Personal Cloud Service:</p>
-            <p class="text-[#94a3b8] text-sm mt-1">Created a cloud platform that automatically spins up Docker containers with preinstalled software like Joomla and WordPress, implemented virtual machines using KVM, and provided cloud storage solutions.</p>
-          </div>
-          <div class="pl-4 border-l-2 border-[#7dd3fc]/50">
-            <p class="text-[#f8fafc] font-medium">Bioinformatics Tools:</p>
-            <p class="text-[#94a3b8] text-sm mt-1">Built specialized services offering bioinformatics analysis tools, streamlining the processing of complex scientific data.</p>
-          </div>
+      
+      <!-- Philosophy Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-[#161a22]/50 border border-[#334155] rounded-lg p-6">
+          <h3 class="text-[#7dd3fc] font-mono text-sm mb-3">{t('about.philosophy')}</h3>
+          <p class="text-[#94a3b8] leading-relaxed">{t('about.philosophy.text')}</p>
         </div>
-        
-        <p>I work with Python, Flask, FastAPI, Node.js, Astro, TypeScript, JavaScript, Laravel, React, SQL, Golang, and Docker. My expertise extends to cloud development (AWS) and DevOps practices, ensuring scalable and efficient solutions.</p>
-        <p>When not coding, I enjoy watching football, following MotoGP & F1, and capturing moments through photography.</p>
+        <div class="bg-[#161a22]/50 border border-[#334155] rounded-lg p-6">
+          <h3 class="text-[#7dd3fc] font-mono text-sm mb-3">{t('about.learning')}</h3>
+          <p class="text-[#94a3b8] leading-relaxed">{t('about.learning.text')}</p>
+        </div>
+      </div>
+      
+      <div class="text-[#94a3b8] space-y-4 leading-relaxed">
+        <p>{t('hero.subtitle')}</p>
       </div>
     </div>
   </section>
@@ -146,12 +114,12 @@ const techStack = {
     <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
       <TimelineSection 
         sectionId="experience" 
-        sectionTitle="Work Experience" 
+        sectionTitle={t('timeline.work')} 
         items={experienceItems} 
       />
       <TimelineSection 
         sectionId="studies" 
-        sectionTitle="Formal Education" 
+        sectionTitle={t('timeline.education')} 
         items={studiesItems} 
       />
     </div>
@@ -162,11 +130,11 @@ const techStack = {
     <div class="max-w-6xl mx-auto">
       <h2 class="text-[#f8fafc] text-2xl md:text-3xl mb-8 text-center flex items-center justify-center gap-3">
         <span class="text-[#7dd3fc] font-mono text-sm">03 //</span>
-        ARTIFACTS & CODEBASES
+        {t('section.artifacts').replace('03 // ', '')}
       </h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {projects.map((project) => (
-          <ProjectCard project={project} />
+        {portfolioData.projects.map((project) => (
+          <ProjectCard project={project} t={t} />
         ))}
       </div>
     </div>
@@ -176,15 +144,15 @@ const techStack = {
   <section id="contact" class="py-16 px-4">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-[#f8fafc] text-2xl md:text-3xl mb-8 text-center">
-        Direct Dispatch Terminal
+        {t('dispatch.title')}
       </h2>
       <div class="bg-[#161a22]/80 border border-[#334155] rounded-lg p-8">
         <p class="text-[#94a3b8] text-center mb-6">
-          Available for collaborations and opportunities
+          {t('dispatch.subtitle')}
         </p>
         <div class="flex justify-center gap-6">
           <a 
-            href="https://github.com/arnaualbert" 
+            href={portfolioData.contact.github} 
             target="_blank" 
             rel="noopener noreferrer"
             class="text-[#94a3b8] hover:text-[#7dd3fc] transition-colors"
@@ -195,7 +163,18 @@ const techStack = {
             </svg>
           </a>
           <a 
-            href="https://x.com/arnaualbert2003" 
+            href={portfolioData.contact.linkedin} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="text-[#94a3b8] hover:text-[#7dd3fc] transition-colors"
+            aria-label="LinkedIn Profile"
+          >
+            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/>
+            </svg>
+          </a>
+          <a 
+            href={portfolioData.contact.twitter} 
             target="_blank" 
             rel="noopener noreferrer"
             class="text-[#94a3b8] hover:text-[#7dd3fc] transition-colors"
@@ -206,24 +185,13 @@ const techStack = {
             </svg>
           </a>
           <a 
-            href="mailto:arnaualbert2003@gmail.com" 
+            href={`mailto:${portfolioData.contact.email}`} 
             class="text-[#94a3b8] hover:text-[#7dd3fc] transition-colors"
             aria-label="Email Address"
           >
             <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
               <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z"/>
               <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"/>
-            </svg>
-          </a>
-          <a 
-            href="https://www.linkedin.com/in/arnau-albert-s%C3%A1nchez-81211826b/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="text-[#94a3b8] hover:text-[#7dd3fc] transition-colors"
-            aria-label="LinkedIn Profile"
-          >
-            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-              <path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/>
             </svg>
           </a>
         </div>
@@ -234,9 +202,17 @@ const techStack = {
   <!-- Footer -->
   <footer class="py-8 px-4 border-t border-[#334155]">
     <div class="max-w-6xl mx-auto text-center">
-      <p class="text-[#94a3b8] text-sm">
-        © {new Date().getFullYear()} Arnau Albert Sánchez. Built with Astro & TypeScript.
+      <p class="text-[#94a3b8] text-sm mb-2">
+        © {new Date().getFullYear()} {portfolioData.name}. {t('footer.credit')}
       </p>
+      <!-- Language Switcher -->
+      <div class="flex justify-center gap-4 mt-4">
+        <a href="?lang=en" class="text-[#7dd3fc] hover:text-[#f8fafc] transition-colors text-sm">English</a>
+        <span class="text-[#334155]">|</span>
+        <a href="?lang=es" class="text-[#7dd3fc] hover:text-[#f8fafc] transition-colors text-sm">Español</a>
+        <span class="text-[#334155]">|</span>
+        <a href="?lang=ca" class="text-[#7dd3fc] hover:text-[#f8fafc] transition-colors text-sm">Català</a>
+      </div>
     </div>
   </footer>
 </BaseLayout>

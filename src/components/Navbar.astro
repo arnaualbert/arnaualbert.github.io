@@ -1,15 +1,24 @@
 ---
+import { getTranslations } from '../i18n/utils';
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'en' } = Astro.props;
+const t = getTranslations(lang as 'en' | 'es' | 'ca');
+
 interface NavItem {
   label: string;
   href: string;
 }
 
 const navItems: NavItem[] = [
-  { label: 'About', href: '#about' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Studies', href: '#studies' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Contact', href: '#contact' },
+  { label: t('nav.about'), href: '#about' },
+  { label: t('timeline.work'), href: '#experience' },
+  { label: t('timeline.education'), href: '#studies' },
+  { label: t('nav.projects'), href: '#projects' },
+  { label: t('nav.contact'), href: '#contact' },
 ];
 ---
 
