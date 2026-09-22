@@ -207,11 +207,11 @@ const studiesItems = portfolioData.education.map(edu => ({
       </p>
       <!-- Language Switcher -->
       <div class="flex justify-center gap-4 mt-4">
-        <a href="?lang=en" class="text-[#7dd3fc] hover:text-[#f8fafc] transition-colors text-sm">English</a>
+        <a href={Astro.url.pathname + '?lang=en'} class:list={['text-sm transition-colors', lang === 'en' ? 'text-[#f8fafc] font-medium' : 'text-[#7dd3fc] hover:text-[#f8fafc]']}>English</a>
         <span class="text-[#334155]">|</span>
-        <a href="?lang=es" class="text-[#7dd3fc] hover:text-[#f8fafc] transition-colors text-sm">Español</a>
+        <a href={Astro.url.pathname + '?lang=es'} class:list={['text-sm transition-colors', lang === 'es' ? 'text-[#f8fafc] font-medium' : 'text-[#7dd3fc] hover:text-[#f8fafc]']}>Español</a>
         <span class="text-[#334155]">|</span>
-        <a href="?lang=ca" class="text-[#7dd3fc] hover:text-[#f8fafc] transition-colors text-sm">Català</a>
+        <a href={Astro.url.pathname + '?lang=ca'} class:list={['text-sm transition-colors', lang === 'ca' ? 'text-[#f8fafc] font-medium' : 'text-[#7dd3fc] hover:text-[#f8fafc]']}>Català</a>
       </div>
     </div>
   </footer>
