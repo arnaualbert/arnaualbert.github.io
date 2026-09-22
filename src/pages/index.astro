@@ -21,7 +21,7 @@ if (yearsDiff >= 1) {
 
 <Layout>
   <!-- ============ Top Ambient Telemetry Strip ============ -->
-  <section class="w-full bg-surface-container-lowest px-6 lg:px-12 py-3">
+  <section class="w-full bg-surface-container-lowest px-4 sm:px-6 lg:px-12 py-3">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4 font-code text-label-sm text-outline">
       <div class="flex items-center gap-4">
         <span class="inline-flex items-center gap-1.5 text-on-surface">
@@ -41,10 +41,10 @@ if (yearsDiff >= 1) {
   </section>
 
   <!-- ============ Editorial Executive Hero ============ -->
-  <section class="w-full bg-surface py-16 lg:py-24 px-6 lg:px-12 relative overflow-hidden">
+  <section class="w-full bg-surface py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-12 relative overflow-hidden">
     <div class="absolute inset-0 bg-[radial-gradient(#282a2e_1px,transparent_1px)] [background-size:24px_24px] opacity-25 pointer-events-none"></div>
     <div class="max-w-7xl mx-auto relative z-10">
-      <div class="flex flex-wrap items-center gap-3 mb-8">
+      <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-6 sm:mb-8">
         <span class="inline-flex items-center gap-2 px-3 py-1 rounded bg-surface-container text-on-surface font-code text-label-sm">
           <span class="w-2 h-2 rounded-full bg-primary-container"></span>
           Based in Barcelona, ES • Full Stack &amp; DevOps
@@ -53,13 +53,13 @@ if (yearsDiff >= 1) {
         <span class="px-2.5 py-1 rounded bg-surface-container-high text-primary font-code text-label-sm">Available Q3/Q4 2024</span>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-end mb-10 lg:mb-12">
         <div class="lg:col-span-8">
           <p class="font-code text-primary text-label-md tracking-wider uppercase mb-3">// Senior Technical Dossier</p>
-          <h1 class="font-display text-display text-on-surface tracking-tight font-semibold mb-6">
+          <h1 class="font-display text-display-mobile sm:text-display text-on-surface tracking-tight font-semibold mb-6">
             Arnau Albert Sánchez
           </h1>
-          <p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl leading-relaxed">
+          <p class="font-body-md text-body-md sm:font-body-lg sm:text-body-lg text-on-surface-variant max-w-3xl leading-relaxed">
             Full Stack web developer &amp; DevOps engineer in Barcelona with {experienceText} of experience
             engineering high-performance software, specialized bioinformatics systems, and automated cloud
             infrastructure for world-class supercomputing and genomics institutes.
@@ -68,11 +68,11 @@ if (yearsDiff >= 1) {
 
         <div class="lg:col-span-4 flex flex-col gap-3">
           <div class="flex flex-wrap gap-3">
-            <a class="flex-1 min-w-[140px] px-5 py-3 rounded bg-surface-container text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors text-center font-label-md text-label-md font-medium shadow-sm flex items-center justify-center gap-2" href="#projects">
+            <a class="flex-1 min-w-[120px] sm:min-w-[140px] px-5 py-3 rounded bg-surface-container text-on-surface hover:bg-surface-container-high hover:text-primary transition-colors text-center font-label-md text-label-md font-medium shadow-sm flex items-center justify-center gap-2" href="#projects">
               <span class="material-symbols-outlined text-[18px]">terminal</span>
               View Work
             </a>
-            <a class="flex-1 min-w-[140px] px-5 py-3 rounded bg-primary text-on-primary hover:bg-primary-fixed-dim transition-colors text-center font-label-md text-label-md font-semibold flex items-center justify-center gap-2 shadow-sm" href="#contact">
+            <a class="flex-1 min-w-[120px] sm:min-w-[140px] px-5 py-3 rounded bg-primary text-on-primary hover:bg-primary-fixed-dim transition-colors text-center font-label-md text-label-md font-semibold flex items-center justify-center gap-2 shadow-sm" href="#contact">
               <span class="material-symbols-outlined text-[18px]">send</span>
               Get in Touch
             </a>
@@ -85,13 +85,13 @@ if (yearsDiff >= 1) {
       </div>
 
       <!-- Metrics Bento Grid -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 pt-4 sm:pt-6 bg-surface-container-lowest p-4 sm:p-6 rounded-xl shadow-sm">
         <div class="flex flex-col p-4 bg-surface-container-low rounded">
           <div class="flex items-center justify-between mb-2">
             <span class="font-code text-label-sm text-outline">EXPERIENCE</span>
             <span class="material-symbols-outlined text-primary text-[18px]">verified</span>
           </div>
-          <span class="font-display text-headline-lg text-on-surface font-semibold">{experienceText}</span>
+          <span class="font-display text-headline-lg-mobile sm:text-headline-lg text-on-surface font-semibold">{experienceText}</span>
           <span class="font-body-sm text-body-sm text-on-surface-variant mt-1">High-throughput software &amp; automated cloud</span>
         </div>
         <div class="flex flex-col p-4 bg-surface-container-low rounded">
@@ -99,7 +99,7 @@ if (yearsDiff >= 1) {
             <span class="font-code text-label-sm text-outline">RESEARCH AFFILIATION</span>
             <span class="material-symbols-outlined text-primary text-[18px]">memory</span>
           </div>
-          <span class="font-headline-md text-headline-md text-on-surface font-semibold">BSC (Supercomputing)</span>
+          <span class="font-headline-sm sm:text-headline-md text-on-surface font-semibold">BSC (Supercomputing)</span>
           <span class="font-body-sm text-body-sm text-on-surface-variant mt-1">National supercomputing infrastructure</span>
         </div>
         <div class="flex flex-col p-4 bg-surface-container-low rounded">
@@ -107,7 +107,7 @@ if (yearsDiff >= 1) {
             <span class="font-code text-label-sm text-outline">GENOMICS DEPLOYMENT</span>
             <span class="material-symbols-outlined text-primary text-[18px]">biotech</span>
           </div>
-          <span class="font-headline-md text-headline-md text-on-surface font-semibold">IRB Barcelona</span>
+          <span class="font-headline-sm sm:text-headline-md text-on-surface font-semibold">IRB Barcelona</span>
           <span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Bioinformatics pipelines &amp; job orchestration</span>
         </div>
         <div class="flex flex-col p-4 bg-surface-container-low rounded">
@@ -115,7 +115,7 @@ if (yearsDiff >= 1) {
             <span class="font-code text-label-sm text-outline">CORE DISCIPLINE</span>
             <span class="material-symbols-outlined text-primary text-[18px]">data_object</span>
           </div>
-          <span class="font-headline-md text-headline-md text-on-surface font-semibold">Golang • Python</span>
+          <span class="font-headline-sm sm:text-headline-md text-on-surface font-semibold">Golang • Python</span>
           <span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Cloud/DevOps &amp; Bare-Metal KVM</span>
         </div>
       </div>
@@ -123,19 +123,19 @@ if (yearsDiff >= 1) {
   </section>
 
   <!-- ============ SECTION 01: About ============ -->
-  <section class="w-full bg-surface-container-lowest py-20 px-6 lg:px-12" id="about">
+  <section class="w-full bg-surface-container-lowest py-14 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12" id="about">
     <div class="max-w-7xl mx-auto">
       <div class="flex items-center gap-3 mb-4">
         <span class="font-code text-label-md text-primary tracking-widest uppercase">01 // Architecture &amp; Focus</span>
         <div class="h-0.5 w-12 bg-surface-variant"></div>
       </div>
-      <h2 class="font-headline-lg text-headline-lg text-on-surface font-semibold mb-12">
+      <h2 class="font-headline-lg-mobile sm:font-headline-lg text-headline-lg-mobile sm:text-headline-lg text-on-surface font-semibold mb-8 lg:mb-12">
         Systems Philosophy &amp; Core Competencies
       </h2>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div class="lg:col-span-7 flex flex-col gap-6">
-          <div class="p-8 rounded-xl bg-surface-container-low shadow-sm flex flex-col gap-6">
+          <div class="p-6 sm:p-8 rounded-xl bg-surface-container-low shadow-sm flex flex-col gap-5 sm:gap-6">
             <div class="flex items-center justify-between">
               <span class="font-code text-code text-on-surface-variant">// Executive Statement</span>
               <span class="font-code text-label-sm text-primary uppercase">Mission Profile</span>
@@ -231,15 +231,15 @@ if (yearsDiff >= 1) {
   </section>
 
   <!-- ============ SECTION 02: Experience & Education ============ -->
-  <section class="w-full bg-surface py-20 px-6 lg:px-12" id="experience">
+  <section class="w-full bg-surface py-14 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12" id="experience">
     <div class="max-w-7xl mx-auto">
       <div class="flex items-center gap-3 mb-4">
         <span class="font-code text-label-md text-primary tracking-widest uppercase">02 // Chronicle &amp; Credentials</span>
         <div class="h-0.5 w-12 bg-surface-variant"></div>
       </div>
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-16">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 lg:mb-16">
         <div>
-          <h2 class="font-headline-lg text-headline-lg text-on-surface font-semibold">Institutional Track Record</h2>
+          <h2 class="font-headline-lg-mobile sm:font-headline-lg text-headline-lg-mobile sm:text-headline-lg text-on-surface font-semibold">Institutional Track Record</h2>
           <p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-2xl">
             Sustained contributions to national supercomputing centres, clinical biotechnology institutes,
             and rigorous academic credentials in systems administration.
@@ -250,12 +250,12 @@ if (yearsDiff >= 1) {
         </span>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
         <!-- Work Experience -->
         <div class="lg:col-span-7 flex flex-col gap-6">
           <div class="flex items-center gap-2 pb-2">
             <span class="material-symbols-outlined text-primary text-[22px]">domain</span>
-            <h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Work Experience</h3>
+            <h3 class="font-headline-sm sm:text-headline-md text-on-surface font-semibold">Work Experience</h3>
           </div>
 
           <div class="flex flex-col gap-4">
@@ -338,7 +338,7 @@ if (yearsDiff >= 1) {
         <div class="lg:col-span-5 flex flex-col gap-6">
           <div class="flex items-center gap-2 pb-2">
             <span class="material-symbols-outlined text-primary text-[22px]">school</span>
-            <h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Formal Education</h3>
+            <h3 class="font-headline-sm sm:text-headline-md text-on-surface font-semibold">Formal Education</h3>
           </div>
 
           <div class="flex flex-col gap-4">
@@ -387,15 +387,15 @@ if (yearsDiff >= 1) {
   </section>
 
   <!-- ============ SECTION 03: Projects ============ -->
-  <section class="w-full bg-surface-container-lowest py-20 px-6 lg:px-12" id="projects">
+  <section class="w-full bg-surface-container-lowest py-14 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12" id="projects">
     <div class="max-w-7xl mx-auto">
       <div class="flex items-center gap-3 mb-4">
         <span class="font-code text-label-md text-primary tracking-widest uppercase">03 // Artifacts &amp; Codebases</span>
         <div class="h-0.5 w-12 bg-surface-variant"></div>
       </div>
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 lg:mb-12">
         <div>
-          <h2 class="font-headline-lg text-headline-lg text-on-surface font-semibold">Featured Systems &amp; Deployments</h2>
+          <h2 class="font-headline-lg-mobile sm:font-headline-lg text-headline-lg-mobile sm:text-headline-lg text-on-surface font-semibold">Featured Systems &amp; Deployments</h2>
           <p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-2xl">
             Selected bioinformatic instruments, sovereign virtualization platforms, and zero-dependency CLI
             utilities built for production resilience.
@@ -406,7 +406,7 @@ if (yearsDiff >= 1) {
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         <!-- Project 1 -->
         <div class="p-6 rounded-xl bg-surface-container-low shadow-sm flex flex-col justify-between hover:bg-surface-container transition-all group">
           <div>
@@ -414,7 +414,7 @@ if (yearsDiff >= 1) {
               <span class="font-code text-label-sm text-primary uppercase">CAPSTONE // BIOINFORMATICS</span>
               <span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">psychology</span>
             </div>
-            <h3 class="font-headline-md text-headline-md text-on-surface font-semibold mb-2 group-hover:text-primary transition-colors">Doctor AI</h3>
+            <h3 class="font-headline-sm sm:text-headline-md text-on-surface font-semibold mb-2 group-hover:text-primary transition-colors">Doctor AI</h3>
             <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed mb-6">
               Final DAW project: Comprehensive portal featuring computational bioinformatic utilities coded
               natively in Golang for parsing large-scale genetic sequence files, combined with Deep Learning
@@ -441,7 +441,7 @@ if (yearsDiff >= 1) {
               <span class="font-code text-label-sm text-primary uppercase">PRODUCTION // BSC + IRB</span>
               <span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">hub</span>
             </div>
-            <h3 class="font-headline-md text-headline-md text-on-surface font-semibold mb-2 group-hover:text-primary transition-colors">Samplexer</h3>
+            <h3 class="font-headline-sm sm:text-headline-md text-on-surface font-semibold mb-2 group-hover:text-primary transition-colors">Samplexer</h3>
             <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed mb-6">
               Mission-critical internal orchestration application deployed across BSC, IRB, and AWS cloud
               clusters. Dynamically generates high-throughput pipeline commands, orchestrates bioinformatic
@@ -468,7 +468,7 @@ if (yearsDiff >= 1) {
               <span class="font-code text-label-sm text-primary uppercase">INFRASTRUCTURE // VIRTUALIZATION</span>
               <span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">dns</span>
             </div>
-            <h3 class="font-headline-md text-headline-md text-on-surface font-semibold mb-2 group-hover:text-primary transition-colors">Cracks</h3>
+            <h3 class="font-headline-sm sm:text-headline-md text-on-surface font-semibold mb-2 group-hover:text-primary transition-colors">Cracks</h3>
             <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed mb-6">
               Personal cloud computing platform architected to manage isolated VPCs, bare-metal KVM virtual
               machines, dynamic Docker container workloads, and high-volume S3-compatible cloud storage nodes
@@ -496,7 +496,7 @@ if (yearsDiff >= 1) {
               <span class="font-code text-label-sm text-primary uppercase">UTILITY // LOW FOOTPRINT</span>
               <span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">schedule</span>
             </div>
-            <h3 class="font-headline-md text-headline-md text-on-surface font-semibold mb-2 group-hover:text-primary transition-colors">TicTac Scheduler</h3>
+            <h3 class="font-headline-sm sm:text-headline-md text-on-surface font-semibold mb-2 group-hover:text-primary transition-colors">TicTac Scheduler</h3>
             <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed mb-6">
               Ultra-lightweight CLI task and batch job scheduler written in pure Golang. Operates as a
               completely zero-dependency single binary relying strictly on an embedded SQLite3 driver for
@@ -523,7 +523,7 @@ if (yearsDiff >= 1) {
               <span class="font-code text-label-sm text-primary uppercase">INTERFACE // EDITORIAL WEB</span>
               <span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">web</span>
             </div>
-            <h3 class="font-headline-md text-headline-md text-on-surface font-semibold mb-2 group-hover:text-primary transition-colors">Personal Site &amp; Portfolio</h3>
+            <h3 class="font-headline-sm sm:text-headline-md text-on-surface font-semibold mb-2 group-hover:text-primary transition-colors">Personal Site &amp; Portfolio</h3>
             <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed mb-6">
               Modern executive digital footprint engineered strictly with semantic HTML, modular Tailwind
               styling, and Astro static generation for sub-50ms Time-to-First-Byte performance and zero client
@@ -550,7 +550,7 @@ if (yearsDiff >= 1) {
               <span class="font-code text-label-sm text-primary uppercase">DEV WORKFLOW // AUTOMATION</span>
               <span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">rocket_launch</span>
             </div>
-            <h3 class="font-headline-md text-headline-md text-on-surface font-semibold mb-2 group-hover:text-primary transition-colors">Tasty Venus</h3>
+            <h3 class="font-headline-sm sm:text-headline-md text-on-surface font-semibold mb-2 group-hover:text-primary transition-colors">Tasty Venus</h3>
             <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed mb-6">
               Continuous deployment pipeline experiment validating frictionless continuous integration on
               GitHub Pages utilizing Astro, TypeScript, and modern component hydration techniques under strict
@@ -574,15 +574,15 @@ if (yearsDiff >= 1) {
   </section>
 
   <!-- ============ SECTION 04: Contact ============ -->
-  <section class="w-full bg-surface py-20 px-6 lg:px-12" id="contact">
+  <section class="w-full bg-surface py-14 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12" id="contact">
     <div class="max-w-7xl mx-auto">
       <div class="flex items-center gap-3 mb-4">
         <span class="font-code text-label-md text-primary tracking-widest uppercase">04 // Secure Communications</span>
         <div class="h-0.5 w-12 bg-surface-variant"></div>
       </div>
-      <h2 class="font-headline-lg text-headline-lg text-on-surface font-semibold mb-12">Initiate Technical Inquiry</h2>
+      <h2 class="font-headline-lg-mobile sm:font-headline-lg text-headline-lg-mobile sm:text-headline-lg text-on-surface font-semibold mb-8 lg:mb-12">Initiate Technical Inquiry</h2>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
         <div class="lg:col-span-5 flex flex-col justify-between">
           <div class="flex flex-col gap-6">
             <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
@@ -638,7 +638,7 @@ if (yearsDiff >= 1) {
         </div>
 
         <div class="lg:col-span-7">
-          <div class="p-8 rounded-xl bg-surface-container-low shadow-sm">
+          <div class="p-6 sm:p-8 rounded-xl bg-surface-container-low shadow-sm">
             <div class="flex items-center justify-between mb-6 pb-4">
               <div class="flex items-center gap-2">
                 <span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
@@ -674,9 +674,9 @@ if (yearsDiff >= 1) {
                 <textarea class="w-full px-4 py-3 rounded bg-surface text-on-surface font-body-md text-body-md placeholder-outline focus:outline-none focus:ring-1 focus:ring-primary shadow-sm resize-none" id="contact-message" placeholder="Describe system architecture, deployment scale, timeline, or engineering objectives..." required rows="5"></textarea>
               </div>
 
-              <div class="flex items-center justify-between pt-2">
+              <div class="flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-3 pt-2">
                 <span class="font-code text-body-sm text-primary" id="formFeedback"></span>
-                <button class="px-6 py-3 rounded bg-primary text-on-primary hover:bg-primary-fixed-dim transition-colors font-label-md text-label-md font-semibold flex items-center gap-2 shadow-sm ml-auto" id="submitBtn" type="submit">
+                <button class="px-6 py-3 rounded bg-primary text-on-primary hover:bg-primary-fixed-dim transition-colors font-label-md text-label-md font-semibold flex items-center justify-center gap-2 shadow-sm w-full sm:w-auto sm:ml-auto" id="submitBtn" type="submit">
                   <span class="material-symbols-outlined text-[18px]">send</span>
                   Dispatch Transmission
                 </button>
