@@ -1,20 +1,24 @@
-```gitignore
+```
+# Build artifacts
+dist/
+build/
+*.css
+*.js
+*.html
+
 # Dependencies
 node_modules/
 
-# Build outputs
-dist/
-build/
-*.css.map
-
 # Cache directories
-.cache/
-.node_cache/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 
 # Environment variables
 .env
 .env.local
-.env.*
+*.env.*
 
 # IDE specific
 .vscode/
@@ -29,6 +33,13 @@ Thumbs.db
 # Logs
 *.log
 
-# Temporary files
-*.tmp
+# Coverage reports
+coverage/
+htmlcov/
+*.coverage
+
+# Distribution / packaging
+*.tar.gz
+*.whl
+*.egg-info/
 ```
