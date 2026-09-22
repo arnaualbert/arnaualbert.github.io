@@ -1,136 +1,60 @@
 ---
-import { getTranslations } from '../i18n/utils';
-
-interface Props {
-  lang?: string;
-}
-
-const { lang = 'en' } = Astro.props;
-const t = getTranslations(lang as 'en' | 'es' | 'ca');
-
-interface NavItem {
-  label: string;
-  href: string;
-}
-
-const navItems: NavItem[] = [
-  { label: t('nav.about'), href: '#about' },
-  { label: t('timeline.work'), href: '#experience' },
-  { label: t('timeline.education'), href: '#studies' },
-  { label: t('nav.projects'), href: '#projects' },
-  { label: t('nav.contact'), href: '#contact' },
+const navLinks = [
+  { label: 'Overview',   href: '#',           active: true },
+  { label: 'About',      href: '#about',      active: false },
+  { label: 'Experience', href: '#experience', active: false },
+  { label: 'Projects',   href: '#projects',   active: false },
+  { label: 'Contact',    href: '#contact',    active: false },
 ];
 ---
 
-<nav class="border-b border-[#334155] fixed w-full z-50 top-0 start-0 bg-[#161a22]/95 backdrop-blur-sm transition-all duration-300">
-  <div class="max-w-7xl flex flex-wrap items-center justify-between mx-auto px-4 py-3">
-    <a href="#" class="flex items-center gap-3 group">
-      <svg class="w-8 h-8 text-[#7dd3fc] group-hover:text-[#f8fafc] transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 18" />
-      </svg>
-      <span id="nav-name" class="text-[#f8fafc] font-medium text-lg opacity-0 -translate-x-4 transition-all duration-300 hidden md:block">Arnau Albert Sánchez</span>
-    </a>
-    
-    <button 
-      data-collapse-toggle="navbar-main" 
-      type="button" 
-      class="inline-flex items-center p-2 w-10 h-10 justify-center text-[#94a3b8] rounded-lg md:hidden hover:bg-[#334155]/50 focus:outline-none focus:ring-2 focus:ring-[#7dd3fc]/50"
-      aria-controls="navbar-main" 
-      aria-expanded="false"
-    >
-      <span class="sr-only">Open main menu</span>
-      <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-      </svg>
-    </button>
-    
-    <div class="items-center hidden w-full md:flex md:w-auto md:order-1" id="navbar-main">
-      <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 text-center">
-        {navItems.map((item) => (
-          <li>
-            <a 
-              href={item.href} 
-              class="block py-2 px-3 text-[#94a3b8] hover:text-[#7dd3fc] transition-colors rounded-sm nav-link"
-              data-lang={lang}
-            >
-              {item.label}
-            </a>
-          </li>
-        ))}
-      </ul>
+<header
+  class="fixed top-0 left-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"
+>
+  <div class="h-16 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
+    <div class="flex items-center gap-space-md">
+      <a class="flex items-center gap-space-sm" data-path="overview" href="#">
+        <span
+          class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight"
+        >Arnau Albert Sánchez</span>
+      </a>
+      <span
+        class="hidden sm:inline-flex items-center px-space-xs py-0.5 rounded-DEFAULT bg-surface-container-high text-on-surface-variant font-code text-code"
+      >Full Stack &amp; DevOps</span>
+    </div>
+
+    <nav class="hidden md:flex items-center gap-space-lg">
+      {navLinks.map(({ label, href, active }) => (
+        <a
+          href={href}
+          aria-current={active ? 'page' : undefined}
+          class={
+            active
+              ? 'transition-colors text-on-surface bg-surface-container-high rounded px-3 py-1.5 font-medium'
+              : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low px-3 py-1.5 rounded transition-colors font-label-md text-label-md'
+          }
+        >{label}</a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-space-md">
+      <div
+        class="hidden lg:flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container-low"
+      >
+        <span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+        <span
+          class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+        >Available for roles</span>
+      </div>
+      <a
+        class="px-space-md py-1.5 rounded bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-colors font-label-md text-label-md font-medium"
+        href="#contact"
+      >Resume / Contact</a>
+      <div
+        class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"
+      >
+        <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+      </div>
     </div>
   </div>
-</nav>
-
-<script>
-  // Get current language from URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const currentLang = urlParams.get('lang') || 'en';
-  
-  // Update all nav links to include current language
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.setAttribute('data-lang', currentLang);
-  });
-  
-  document.addEventListener('DOMContentLoaded', () => {
-    const button = document.querySelector('[data-collapse-toggle="navbar-main"]');
-    const menu = document.getElementById('navbar-main');
-    const navName = document.getElementById('nav-name');
-    
-    if (button && menu) {
-      button.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
-        const expanded = button.getAttribute('aria-expanded') === 'true' || false;
-        button.setAttribute('aria-expanded', !expanded);
-      });
-      
-      const menuLinks = menu.querySelectorAll('a');
-      menuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          if (window.innerWidth < 768) {
-            menu.classList.add('hidden');
-            button.setAttribute('aria-expanded', 'false');
-          }
-        });
-      });
-    }
-    
-    if (navName) {
-      const showNameOnScroll = () => {
-        if (window.scrollY > 50) {
-          navName.classList.remove('opacity-0', '-translate-x-4');
-          navName.classList.add('opacity-100', 'translate-x-0');
-        } else {
-          navName.classList.remove('opacity-100', 'translate-x-0');
-          navName.classList.add('opacity-0', '-translate-x-4');
-        }
-      };
-      
-      showNameOnScroll();
-      window.addEventListener('scroll', showNameOnScroll);
-    }
-    
-    // Handle smooth scroll with offset for fixed navbar
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        
-        if (targetElement) {
-          const navHeight = 70; // Approximate navbar height
-          const elementPosition = targetElement.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - navHeight;
-          
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-          
-          // Update URL without page jump
-          history.pushState(null, null, targetId);
-        }
-      });
-    });
-  });
-</script>
+</header>
