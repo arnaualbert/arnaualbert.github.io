@@ -18,9 +18,30 @@ const { title, lang = 'en' } = Astro.props;
     <meta name="author" content="Arnau Albert Sánchez" />
     <link rel="icon" type="image/svg+xml" href="/coding.svg" />
     <meta name="generator" content={Astro.generator} />
+    
+    <!-- Preconnect to font CDNs -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Geist Font (Vercel) -->
+    <link 
+      href="https://cdn.jsdelivr.net/npm/geist@1.0.0/dist/fonts/geist/stylesheet.css" 
+      rel="stylesheet" 
+    />
+    <link 
+      href="https://cdn.jsdelivr.net/npm/geist@1.0.0/dist/fonts/geist-mono/stylesheet.css" 
+      rel="stylesheet" 
+    />
+    
+    <!-- Inter Font -->
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" 
+      rel="stylesheet" 
+    />
+    
     <title>{title}</title>
   </head>
-  <body class="scroll-smooth">
+  <body class="scroll-smooth bg-[#0c0e12] text-[#f8fafc] font-body">
     <slot />
   </body>
 </html>
