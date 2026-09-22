@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+:root {
+  /* Executive Architectural Palette */
+  --color-bg-primary: #0c0e12;      /* Deep charcoal background */
+  --color-bg-secondary: #161a22;    /* Technical slate */
+  --color-text-primary: #f8fafc;    /* Ice blue / off-white */
+  --color-text-secondary: #94a3b8;  /* Muted slate text */
+  --color-accent: #7dd3fc;          /* Subtle ice-blue accent */
+  --color-border: #334155;          /* Hairline borders */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-[#0c0e12] text-[#f8fafc] font-sans antialiased;
+  min-height: 100vh;
+}
+
+/* Custom scrollbar for technical feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-[#161a22];
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-[#334155] rounded;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-[#475569];
+}
+
+/* Selection color */
+::selection {
+  @apply bg-[#7dd3fc]/30 text-[#f8fafc];
+}
